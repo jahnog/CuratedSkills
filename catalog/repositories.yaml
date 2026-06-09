@@ -1,0 +1,72 @@
+repositories:
+  - id: awesome-copilot
+    owner: github
+    name: awesome-copilot
+    ref: main
+    url: https://github.com/github/awesome-copilot
+
+  - id: claude-code-security-review
+    owner: anthropics
+    name: claude-code-security-review
+    ref: main
+    url: https://github.com/anthropics/claude-code-security-review
+
+  - id: trailofbits-skills
+    owner: trailofbits
+    name: skills
+    ref: main
+    url: https://github.com/trailofbits/skills
+
+  - id: addyosmani-agent-skills
+    owner: addyosmani
+    name: agent-skills
+    ref: main
+    url: https://github.com/addyosmani/agent-skills
+
+  - id: nemoclaw
+    owner: NVIDIA
+    name: NemoClaw
+    ref: main
+    url: https://github.com/NVIDIA/NemoClaw
+
+  - id: semgrep-skills
+    owner: semgrep
+    name: skills
+    ref: main
+    url: https://github.com/semgrep/skills
+
+  - id: semgrep-mcp
+    owner: semgrep
+    name: mcp
+    ref: main
+    url: https://github.com/semgrep/mcp
+
+  - id: trivy-mcp
+    owner: aquasecurity
+    name: trivy-mcp
+    ref: main
+    url: https://github.com/aquasecurity/trivy-mcp
+
+  - id: github-mcp-server
+    owner: github
+    name: github-mcp-server
+    ref: main
+    url: https://github.com/github/github-mcp-server
+
+  - id: coderabbit-skills
+    owner: coderabbitai
+    name: skills
+    ref: main
+    url: https://github.com/coderabbitai/skills
+
+  - id: secops-agent-kit
+    owner: AgentSecOps
+    name: SecOpsAgentKit
+    ref: main
+    url: https://github.com/AgentSecOps/SecOpsAgentKit
+
+  - id: anthropic-cybersecurity-skills
+    owner: mukul975
+    name: Anthropic-Cybersecurity-Skills
+    ref: main
+    url: https://github.com/mukul975/Anthropic-Cybersecurity-Skills

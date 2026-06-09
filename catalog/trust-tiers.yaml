@@ -1,0 +1,18 @@
+tiers:
+  - id: highest
+    label: Highest
+    description: Official or industry-leading sources with strong security track records.
+    order: 1
+    badge_class: tier-highest
+
+  - id: high
+    label: High
+    description: Well-maintained projects from recognized security vendors or communities.
+    order: 2
+    badge_class: tier-high
+
+  - id: medium
+    label: Medium
+    description: Useful but verify before use in production workflows.
+    order: 3
+    badge_class: tier-medium

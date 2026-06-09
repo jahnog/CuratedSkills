@@ -1,0 +1,329 @@
+skills:
+  # --- Highest trust: GitHub awesome-copilot ---
+  - id: awesome-copilot-dependabot
+    name: Dependabot
+    description: Review and triage Dependabot dependency update PRs with security context.
+    repository: awesome-copilot
+    path: skills/dependabot
+    trust_tier: highest
+    categories: [dependabot-prs]
+    tags: [dependabot, dependencies, github]
+
+  - id: awesome-copilot-codeql
+    name: CodeQL
+    description: Run and interpret CodeQL static analysis for vulnerability detection.
+    repository: awesome-copilot
+    path: skills/codeql
+    trust_tier: highest
+    categories: [static-analysis]
+    tags: [codeql, sast, github]
+
+  - id: awesome-copilot-agent-supply-chain
+    name: Agent Supply Chain
+    description: Audit supply chain risks in dependencies and build pipelines.
+    repository: awesome-copilot
+    path: skills/agent-supply-chain
+    trust_tier: highest
+    categories: [dependabot-prs, pr-security-review]
+    tags: [supply-chain, dependencies]
+
+  - id: awesome-copilot-agent-owasp-compliance
+    name: OWASP Compliance
+    description: Map changes and reviews to OWASP Top 10 compliance requirements.
+    repository: awesome-copilot
+    path: skills/agent-owasp-compliance
+    trust_tier: highest
+    categories: [pr-security-review]
+    tags: [owasp, compliance]
+
+  - id: awesome-copilot-secret-scanning
+    name: Secret Scanning
+    description: Detect exposed secrets and credentials in code changes.
+    repository: awesome-copilot
+    path: skills/secret-scanning
+    trust_tier: highest
+    categories: [pr-security-review]
+    tags: [secrets, scanning]
+
+  - id: awesome-copilot-security-review
+    name: Security Review
+    description: Structured security review workflow for pull requests.
+    repository: awesome-copilot
+    path: skills/security-review
+    trust_tier: highest
+    categories: [pr-security-review]
+    tags: [review, pr]
+
+  - id: awesome-copilot-mcp-security-audit
+    name: MCP Security Audit
+    description: Audit MCP server configurations for security risks.
+    repository: awesome-copilot
+    path: skills/mcp-security-audit
+    trust_tier: highest
+    categories: [mcp-integrations, pr-security-review]
+    tags: [mcp, audit]
+
+  - id: awesome-copilot-audit-integrity
+    name: Audit Integrity
+    description: Verify integrity of audit trails and security logging.
+    repository: awesome-copilot
+    path: skills/audit-integrity
+    trust_tier: highest
+    categories: [pr-security-review]
+    tags: [audit, integrity]
+
+  # --- Highest trust: Anthropic action ---
+  - id: claude-code-security-review
+    name: Claude Code Security Review
+    description: GitHub Action for automated security review on pull requests.
+    repository: claude-code-security-review
+    path: ""
+    kind: action
+    primary_file: action.yml
+    trust_tier: highest
+    categories: [pr-security-review]
+    tags: [action, github, review]
+
+  # --- Highest trust: Trail of Bits ---
+  - id: tob-differential-review
+    name: Differential Review
+    description: Security-focused differential code review for PR changes.
+    repository: trailofbits-skills
+    path: plugins/differential-review/skills/differential-review
+    trust_tier: highest
+    categories: [pr-security-review]
+    tags: [review, diff]
+
+  - id: tob-static-analysis-semgrep
+    name: Static Analysis — Semgrep
+    description: Run Semgrep scans and interpret findings in security workflows.
+    repository: trailofbits-skills
+    path: plugins/static-analysis/skills/semgrep
+    trust_tier: highest
+    categories: [static-analysis]
+    tags: [semgrep, sast]
+
+  - id: tob-static-analysis-codeql
+    name: Static Analysis — CodeQL
+    description: CodeQL analysis workflows from Trail of Bits static-analysis plugin.
+    repository: trailofbits-skills
+    path: plugins/static-analysis/skills/codeql
+    trust_tier: highest
+    categories: [static-analysis]
+    tags: [codeql, sast]
+
+  - id: tob-static-analysis-sarif
+    name: SARIF Parsing
+    description: Parse and triage SARIF output from security scanners.
+    repository: trailofbits-skills
+    path: plugins/static-analysis/skills/sarif-parsing
+    trust_tier: highest
+    categories: [static-analysis]
+    tags: [sarif, sast]
+
+  - id: tob-semgrep-rule-creator
+    name: Semgrep Rule Creator
+    description: Author custom Semgrep rules for project-specific vulnerabilities.
+    repository: trailofbits-skills
+    path: plugins/semgrep-rule-creator/skills/semgrep-rule-creator
+    trust_tier: highest
+    categories: [static-analysis]
+    tags: [semgrep, rules]
+
+  - id: tob-semgrep-rule-variant-creator
+    name: Semgrep Rule Variant Creator
+    description: Create Semgrep rule variants for broader vulnerability coverage.
+    repository: trailofbits-skills
+    path: plugins/semgrep-rule-variant-creator/skills/semgrep-rule-variant-creator
+    trust_tier: highest
+    categories: [static-analysis]
+    tags: [semgrep, rules]
+
+  - id: tob-insecure-defaults
+    name: Insecure Defaults
+    description: Find and fix insecure default configurations in code.
+    repository: trailofbits-skills
+    path: plugins/insecure-defaults/skills/insecure-defaults
+    trust_tier: highest
+    categories: [hardening]
+    tags: [defaults, hardening]
+
+  - id: tob-variant-analysis
+    name: Variant Analysis
+    description: Find vulnerability variants across a codebase using patterns.
+    repository: trailofbits-skills
+    path: plugins/variant-analysis/skills/variant-analysis
+    trust_tier: highest
+    categories: [static-analysis, pr-security-review]
+    tags: [variants, analysis]
+
+  - id: tob-sharp-edges
+    name: Sharp Edges
+    description: Identify dangerous APIs and foot-gun patterns in code.
+    repository: trailofbits-skills
+    path: plugins/sharp-edges/skills/sharp-edges
+    trust_tier: highest
+    categories: [hardening]
+    tags: [apis, footguns]
+
+  - id: tob-supply-chain-risk-auditor
+    name: Supply Chain Risk Auditor
+    description: Audit third-party dependencies and supply chain attack surface.
+    repository: trailofbits-skills
+    path: plugins/supply-chain-risk-auditor/skills/supply-chain-risk-auditor
+    trust_tier: highest
+    categories: [dependabot-prs]
+    tags: [supply-chain, dependencies]
+
+  - id: tob-agentic-actions-auditor
+    name: Agentic Actions Auditor
+    description: Audit agent tool actions and permissions for security risks.
+    repository: trailofbits-skills
+    path: plugins/agentic-actions-auditor/skills/agentic-actions-auditor
+    trust_tier: highest
+    categories: [pr-security-review, mcp-integrations]
+    tags: [agents, audit]
+
+  - id: tob-audit-context-building
+    name: Audit Context Building
+    description: Build rich security context before auditing code changes.
+    repository: trailofbits-skills
+    path: plugins/audit-context-building/skills/audit-context-building
+    trust_tier: highest
+    categories: [pr-security-review]
+    tags: [audit, context]
+
+  - id: tob-zeroize-audit
+    name: Zeroize Audit
+    description: Verify sensitive data is properly zeroized and cleared from memory.
+    repository: trailofbits-skills
+    path: plugins/zeroize-audit/skills/zeroize-audit
+    trust_tier: highest
+    categories: [hardening]
+    tags: [crypto, memory]
+
+  # --- Highest trust: Addy Osmani & NVIDIA ---
+  - id: addyosmani-security-hardening
+    name: Security and Hardening
+    description: Apply security hardening patterns during development.
+    repository: addyosmani-agent-skills
+    path: skills/security-and-hardening
+    trust_tier: highest
+    categories: [hardening]
+    tags: [hardening, best-practices]
+
+  - id: addyosmani-code-review-quality
+    name: Code Review and Quality
+    description: Quality-focused code review with security awareness.
+    repository: addyosmani-agent-skills
+    path: skills/code-review-and-quality
+    trust_tier: highest
+    categories: [pr-security-review]
+    tags: [review, quality]
+
+  - id: nemoclaw-maintainer-security-review
+    name: NemoClaw Maintainer Security Review
+    description: Security code review skill for NemoClaw maintainers.
+    repository: nemoclaw
+    path: .agents/skills/nemoclaw-maintainer-security-code-review
+    trust_tier: highest
+    categories: [pr-security-review]
+    tags: [review, nemoclaw]
+
+  - id: nemoclaw-configure-security
+    name: NemoClaw Configure Security
+    description: Configure security settings and policies in NemoClaw.
+    repository: nemoclaw
+    path: .agents/skills/nemoclaw-user-configure-security
+    trust_tier: highest
+    categories: [hardening]
+    tags: [configuration, nemoclaw]
+
+  # --- High trust: Semgrep & MCP servers ---
+  - id: semgrep-skills-semgrep
+    name: Semgrep
+    description: Official Semgrep agent skill for static analysis workflows.
+    repository: semgrep-skills
+    path: skills/semgrep
+    trust_tier: high
+    categories: [static-analysis]
+    tags: [semgrep, sast]
+
+  - id: semgrep-skills-code-security
+    name: Code Security
+    description: Semgrep code security analysis and remediation guidance.
+    repository: semgrep-skills
+    path: skills/code-security
+    trust_tier: high
+    categories: [static-analysis, pr-security-review]
+    tags: [security, semgrep]
+
+  - id: semgrep-mcp
+    name: Semgrep MCP
+    description: MCP server integrating Semgrep scanning into agent workflows.
+    repository: semgrep-mcp
+    path: ""
+    kind: mcp
+    primary_file: README.md
+    trust_tier: high
+    categories: [mcp-integrations, static-analysis]
+    tags: [semgrep, mcp]
+
+  - id: trivy-mcp
+    name: Trivy MCP
+    description: Official Trivy MCP server for container and dependency scanning.
+    repository: trivy-mcp
+    path: ""
+    kind: mcp
+    primary_file: README.md
+    trust_tier: high
+    categories: [mcp-integrations, dependabot-prs]
+    tags: [trivy, mcp, containers]
+
+  - id: github-mcp-server
+    name: GitHub MCP Server
+    description: Official GitHub MCP server including secret scanning and repo tools.
+    repository: github-mcp-server
+    path: ""
+    kind: mcp
+    primary_file: README.md
+    trust_tier: high
+    categories: [mcp-integrations, pr-security-review]
+    tags: [github, mcp, secrets]
+
+  # --- Medium trust ---
+  - id: coderabbit-autofix
+    name: CodeRabbit Autofix
+    description: Automated fix suggestions for code review findings.
+    repository: coderabbit-skills
+    path: skills/autofix
+    trust_tier: medium
+    categories: [pr-security-review]
+    tags: [autofix, review]
+
+  - id: coderabbit-code-review
+    name: CodeRabbit Code Review
+    description: AI-assisted code review skill for pull requests.
+    repository: coderabbit-skills
+    path: skills/code-review
+    trust_tier: medium
+    categories: [pr-security-review]
+    tags: [review, pr]
+
+  - id: secops-secrets-gitleaks
+    name: Secrets — Gitleaks
+    description: DevSecOps skill for secret scanning with Gitleaks.
+    repository: secops-agent-kit
+    path: skills/devsecops/secrets-gitleaks
+    trust_tier: medium
+    categories: [pr-security-review]
+    tags: [gitleaks, secrets]
+
+  - id: anthropic-gitleaks-scanning
+    name: Secret Scanning with Gitleaks
+    description: Implement secret scanning workflows using Gitleaks.
+    repository: anthropic-cybersecurity-skills
+    path: skills/implementing-secret-scanning-with-gitleaks
+    trust_tier: medium
+    categories: [pr-security-review]
+    tags: [gitleaks, secrets]

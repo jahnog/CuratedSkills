@@ -1,0 +1,25 @@
+categories:
+  - id: dependabot-prs
+    label: Dependabot PRs
+    description: Reviewing and applying dependency update pull requests safely.
+    order: 1
+
+  - id: pr-security-review
+    label: PR Security Review
+    description: Security-focused code review for pull requests and diffs.
+    order: 2
+
+  - id: static-analysis
+    label: Static Analysis
+    description: SAST, Semgrep, CodeQL, and rule authoring workflows.
+    order: 3
+
+  - id: hardening
+    label: Hardening
+    description: Secure defaults, configuration, and defensive coding practices.
+    order: 4
+
+  - id: mcp-integrations
+    label: MCP Integrations
+    description: Model Context Protocol servers for security tooling.
+    order: 5

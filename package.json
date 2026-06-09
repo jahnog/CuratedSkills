@@ -1,0 +1,21 @@
+{
+  "name": "curated-skills",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Curated registry of security-focused agent skills with full-text search.",
+  "scripts": {
+    "validate": "node scripts/validate-catalog.mjs",
+    "build:index": "node scripts/build-index.mjs",
+    "build:site": "node scripts/build-site.mjs",
+    "build": "npm run validate && npm run build:index && npm run build:site",
+    "vendor": "cp node_modules/minisearch/dist/umd/index.js web/vendor/minisearch.min.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "minisearch": "^6.3.0",
+    "yaml": "^2.8.0"
+  }
+}
