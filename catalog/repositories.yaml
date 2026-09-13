@@ -23,12 +23,6 @@ repositories:
     ref: main
     url: https://github.com/addyosmani/agent-skills
 
-  - id: nemoclaw
-    owner: NVIDIA
-    name: NemoClaw
-    ref: main
-    url: https://github.com/NVIDIA/NemoClaw
-
   - id: semgrep-skills
     owner: semgrep
     name: skills
@@ -53,47 +47,11 @@ repositories:
     ref: main
     url: https://github.com/github/github-mcp-server
 
-  - id: coderabbit-skills
-    owner: coderabbitai
-    name: skills
-    ref: main
-    url: https://github.com/coderabbitai/skills
-
-  - id: secops-agent-kit
-    owner: AgentSecOps
-    name: SecOpsAgentKit
-    ref: main
-    url: https://github.com/AgentSecOps/SecOpsAgentKit
-
-  - id: anthropic-cybersecurity-skills
-    owner: mukul975
-    name: Anthropic-Cybersecurity-Skills
-    ref: main
-    url: https://github.com/mukul975/Anthropic-Cybersecurity-Skills
-
-  - id: openai-plugins
-    owner: openai
-    name: plugins
-    ref: main
-    url: https://github.com/openai/plugins
-
-  - id: google-skills
-    owner: google
-    name: skills
-    ref: main
-    url: https://github.com/google/skills
-
   - id: getsentry-skills
     owner: getsentry
     name: skills
     ref: main
     url: https://github.com/getsentry/skills
-
-  - id: ghostsecurity-skills
-    owner: ghostsecurity
-    name: skills
-    ref: main
-    url: https://github.com/ghostsecurity/skills
 
   - id: cloudflare-security-audit-skill
     owner: cloudflare
@@ -107,14 +65,32 @@ repositories:
     ref: main
     url: https://github.com/NVIDIA/SkillSpector
 
-  - id: cisco-skill-scanner
-    owner: cisco-ai-defense
-    name: skill-scanner
+  - id: obra-superpowers
+    owner: obra
+    name: superpowers
     ref: main
-    url: https://github.com/cisco-ai-defense/skill-scanner
+    url: https://github.com/obra/superpowers
 
-  - id: snyk-agent-scan
-    owner: snyk
-    name: agent-scan
+  - id: anthropics-skills
+    owner: anthropics
+    name: skills
     ref: main
-    url: https://github.com/snyk/agent-scan
+    url: https://github.com/anthropics/skills
+
+  - id: vercel-labs-agent-skills
+    owner: vercel-labs
+    name: agent-skills
+    ref: main
+    url: https://github.com/vercel-labs/agent-skills
+
+  - id: github-spec-kit
+    owner: github
+    name: spec-kit
+    ref: main
+    url: https://github.com/github/spec-kit
+
+  - id: fission-openspec
+    owner: Fission-AI
+    name: OpenSpec
+    ref: main
+    url: https://github.com/Fission-AI/OpenSpec

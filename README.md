@@ -1,6 +1,6 @@
 # CuratedSkills
 
-A curated registry of security-focused agent skills for reviewing Dependabot PRs, running static analysis, and integrating security MCP servers.
+A curated registry of high-trust agent skills for software engineering and security — specs, tests, review, delivery, Dependabot PRs, static analysis, and security MCP servers.
 
 ## Features
 
@@ -34,7 +34,7 @@ catalog/
 ├── skills.yaml          # Curated skill entries
 ├── repositories.yaml    # GitHub repo metadata
 ├── trust-tiers.yaml     # highest / high / medium
-└── categories.yaml      # dependabot-prs, static-analysis, etc.
+└── categories.yaml      # define-and-plan, testing, security, delivery, etc.
 ```
 
 `folder_url` is always derived at build time from `skill_file_url` — never hand-authored.
