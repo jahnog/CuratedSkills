@@ -1,6 +1,6 @@
 {
   "name": "curated-skills",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "type": "module",
   "description": "Curated registry of security-focused agent skills with full-text search.",

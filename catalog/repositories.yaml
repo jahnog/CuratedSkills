@@ -35,11 +35,11 @@ repositories:
     ref: main
     url: https://github.com/semgrep/skills
 
-  - id: semgrep-mcp
+  - id: semgrep
     owner: semgrep
-    name: mcp
-    ref: main
-    url: https://github.com/semgrep/mcp
+    name: semgrep
+    ref: develop
+    url: https://github.com/semgrep/semgrep
 
   - id: trivy-mcp
     owner: aquasecurity
@@ -70,3 +70,51 @@ repositories:
     name: Anthropic-Cybersecurity-Skills
     ref: main
     url: https://github.com/mukul975/Anthropic-Cybersecurity-Skills
+
+  - id: openai-plugins
+    owner: openai
+    name: plugins
+    ref: main
+    url: https://github.com/openai/plugins
+
+  - id: google-skills
+    owner: google
+    name: skills
+    ref: main
+    url: https://github.com/google/skills
+
+  - id: getsentry-skills
+    owner: getsentry
+    name: skills
+    ref: main
+    url: https://github.com/getsentry/skills
+
+  - id: ghostsecurity-skills
+    owner: ghostsecurity
+    name: skills
+    ref: main
+    url: https://github.com/ghostsecurity/skills
+
+  - id: cloudflare-security-audit-skill
+    owner: cloudflare
+    name: security-audit-skill
+    ref: main
+    url: https://github.com/cloudflare/security-audit-skill
+
+  - id: nvidia-skillspector
+    owner: NVIDIA
+    name: SkillSpector
+    ref: main
+    url: https://github.com/NVIDIA/SkillSpector
+
+  - id: cisco-skill-scanner
+    owner: cisco-ai-defense
+    name: skill-scanner
+    ref: main
+    url: https://github.com/cisco-ai-defense/skill-scanner
+
+  - id: snyk-agent-scan
+    owner: snyk
+    name: agent-scan
+    ref: main
+    url: https://github.com/snyk/agent-scan

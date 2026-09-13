@@ -104,6 +104,9 @@ function getVisibleSkills() {
 function primaryFileLabel(skill) {
   if (skill.kind === 'mcp') return 'Open README';
   if (skill.kind === 'action') return `Open ${skill.primary_file}`;
+  if (skill.primary_file && skill.primary_file !== 'SKILL.md') {
+    return `Open ${skill.primary_file}`;
+  }
   return 'Open SKILL.md';
 }
 

@@ -23,3 +23,8 @@ categories:
     label: MCP Integrations
     description: Model Context Protocol servers for security tooling.
     order: 5
+
+  - id: agent-skill-security
+    label: Agent Skill Security
+    description: Scan, vet, and harden agent skills, MCP configs, and the skill supply chain before install.
+    order: 6
