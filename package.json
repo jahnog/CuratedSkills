@@ -3,7 +3,7 @@
   "version": "1.1.0",
   "private": true,
   "type": "module",
-  "description": "Curated registry of security-focused agent skills with full-text search.",
+  "description": "Curated registry of high-trust software engineering and security agent skills with full-text search.",
   "scripts": {
     "validate": "node scripts/validate-catalog.mjs",
     "build:index": "node scripts/build-index.mjs",

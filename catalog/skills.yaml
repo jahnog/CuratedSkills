@@ -18,24 +18,6 @@ skills:
     categories: [static-analysis]
     tags: [codeql, sast, github]
 
-  - id: awesome-copilot-agent-supply-chain
-    name: Agent Supply Chain
-    description: Audit supply chain risks in dependencies and build pipelines.
-    repository: awesome-copilot
-    path: skills/agent-supply-chain
-    trust_tier: highest
-    categories: [dependabot-prs, pr-security-review]
-    tags: [supply-chain, dependencies]
-
-  - id: awesome-copilot-agent-owasp-compliance
-    name: OWASP Compliance
-    description: Map changes and reviews to OWASP Top 10 compliance requirements.
-    repository: awesome-copilot
-    path: skills/agent-owasp-compliance
-    trust_tier: highest
-    categories: [pr-security-review]
-    tags: [owasp, compliance]
-
   - id: awesome-copilot-secret-scanning
     name: Secret Scanning
     description: Detect exposed secrets and credentials in code changes.
@@ -44,15 +26,6 @@ skills:
     trust_tier: highest
     categories: [pr-security-review]
     tags: [secrets, scanning]
-
-  - id: awesome-copilot-security-review
-    name: Security Review
-    description: Structured security review workflow for pull requests.
-    repository: awesome-copilot
-    path: skills/security-review
-    trust_tier: highest
-    categories: [pr-security-review]
-    tags: [review, pr]
 
   - id: awesome-copilot-mcp-security-audit
     name: MCP Security Audit
@@ -63,15 +36,6 @@ skills:
     categories: [mcp-integrations, pr-security-review]
     tags: [mcp, audit]
 
-  - id: awesome-copilot-audit-integrity
-    name: Audit Integrity
-    description: Verify integrity of audit trails and security logging.
-    repository: awesome-copilot
-    path: skills/audit-integrity
-    trust_tier: highest
-    categories: [pr-security-review]
-    tags: [audit, integrity]
-
   - id: awesome-copilot-github-actions-hardening
     name: GitHub Actions Hardening
     description: Harden GitHub Actions workflows against injection, privileged triggers, and mutable action pins.
@@ -80,15 +44,6 @@ skills:
     trust_tier: highest
     categories: [hardening, pr-security-review]
     tags: [github-actions, ci, hardening]
-
-  - id: awesome-copilot-mcp-implementation-security-review
-    name: MCP Implementation Security Review
-    description: Review MCP server and client implementations against auth, RCE, and OWASP MCP Top 10 controls.
-    repository: awesome-copilot
-    path: skills/mcp-implementation-security-review
-    trust_tier: highest
-    categories: [mcp-integrations, pr-security-review]
-    tags: [mcp, owasp, review]
 
   - id: awesome-copilot-threat-model-analyst
     name: Threat Model Analyst
@@ -117,41 +72,14 @@ skills:
     categories: [hardening, agent-skill-security]
     tags: [agents, governance]
 
-  - id: awesome-copilot-sandbox-npm-install
-    name: Sandbox npm Install
-    description: Install npm dependencies in a sandbox to reduce supply-chain execution risk.
+  - id: awesome-copilot-acquire-codebase-knowledge
+    name: Acquire Codebase Knowledge
+    description: Map a repository into evidence-only onboarding docs covering stack, structure, architecture, conventions, testing, and concerns.
     repository: awesome-copilot
-    path: skills/sandbox-npm-install
+    path: skills/acquire-codebase-knowledge
     trust_tier: highest
-    categories: [dependabot-prs, hardening]
-    tags: [npm, sandbox, supply-chain]
-
-  - id: awesome-copilot-verify-agent-action
-    name: Verify Agent Action
-    description: Verify agent tool actions before they run, including permission and side-effect checks.
-    repository: awesome-copilot
-    path: skills/verify-agent-action
-    trust_tier: highest
-    categories: [pr-security-review, agent-skill-security]
-    tags: [agents, verification]
-
-  - id: awesome-copilot-data-breach-blast-radius
-    name: Data Breach Blast Radius
-    description: Map blast radius and likely impact after a suspected data or credential breach.
-    repository: awesome-copilot
-    path: skills/data-breach-blast-radius
-    trust_tier: highest
-    categories: [pr-security-review]
-    tags: [incident, secrets]
-
-  - id: awesome-copilot-gdpr-compliant
-    name: GDPR Compliant
-    description: Review changes and data handling against GDPR-oriented privacy requirements.
-    repository: awesome-copilot
-    path: skills/gdpr-compliant
-    trust_tier: highest
-    categories: [hardening]
-    tags: [gdpr, privacy, compliance]
+    categories: [architecture]
+    tags: [onboarding, architecture, documentation]
 
   # --- Highest trust: Anthropic action ---
   - id: claude-code-security-review
@@ -175,24 +103,6 @@ skills:
     categories: [pr-security-review]
     tags: [review, diff]
 
-  - id: tob-static-analysis-semgrep
-    name: Static Analysis — Semgrep
-    description: Run Semgrep scans and interpret findings in security workflows.
-    repository: trailofbits-skills
-    path: plugins/static-analysis/skills/semgrep
-    trust_tier: highest
-    categories: [static-analysis]
-    tags: [semgrep, sast]
-
-  - id: tob-static-analysis-codeql
-    name: Static Analysis — CodeQL
-    description: CodeQL analysis workflows from Trail of Bits static-analysis plugin.
-    repository: trailofbits-skills
-    path: plugins/static-analysis/skills/codeql
-    trust_tier: highest
-    categories: [static-analysis]
-    tags: [codeql, sast]
-
   - id: tob-static-analysis-sarif
     name: SARIF Parsing
     description: Parse and triage SARIF output from security scanners.
@@ -207,15 +117,6 @@ skills:
     description: Author custom Semgrep rules for project-specific vulnerabilities.
     repository: trailofbits-skills
     path: plugins/semgrep-rule-creator/skills/semgrep-rule-creator
-    trust_tier: highest
-    categories: [static-analysis]
-    tags: [semgrep, rules]
-
-  - id: tob-semgrep-rule-variant-creator
-    name: Semgrep Rule Variant Creator
-    description: Create Semgrep rule variants for broader vulnerability coverage.
-    repository: trailofbits-skills
-    path: plugins/semgrep-rule-variant-creator/skills/semgrep-rule-variant-creator
     trust_tier: highest
     categories: [static-analysis]
     tags: [semgrep, rules]
@@ -275,15 +176,6 @@ skills:
     categories: [pr-security-review]
     tags: [audit, context]
 
-  - id: tob-zeroize-audit
-    name: Zeroize Audit
-    description: Verify sensitive data is properly zeroized and cleared from memory.
-    repository: trailofbits-skills
-    path: plugins/zeroize-audit/skills/zeroize-audit
-    trust_tier: highest
-    categories: [hardening]
-    tags: [crypto, memory]
-
   - id: tob-fp-check
     name: False Positive Check
     description: Systematically verify security findings and refute false positives before reporting.
@@ -292,33 +184,6 @@ skills:
     trust_tier: highest
     categories: [static-analysis, pr-security-review]
     tags: [triage, false-positives]
-
-  - id: tob-rust-review
-    name: Rust Review
-    description: Rust security review covering unsafe boundaries, memory safety, concurrency, and FFI.
-    repository: trailofbits-skills
-    path: plugins/rust-review/skills/rust-review
-    trust_tier: highest
-    categories: [pr-security-review, static-analysis]
-    tags: [rust, review]
-
-  - id: tob-c-review
-    name: C Review
-    description: C and C++ security code review with coverage checked against a parse of the source.
-    repository: trailofbits-skills
-    path: plugins/c-review/skills/c-review
-    trust_tier: highest
-    categories: [pr-security-review, static-analysis]
-    tags: [c, cpp, review]
-
-  - id: tob-constant-time-analysis
-    name: Constant-Time Analysis
-    description: Detect compiler-induced timing side channels in cryptographic code.
-    repository: trailofbits-skills
-    path: plugins/constant-time-analysis/skills/constant-time-analysis
-    trust_tier: highest
-    categories: [hardening, static-analysis]
-    tags: [crypto, timing]
 
   - id: tob-vulnerability-triage-brocards
     name: Vulnerability Triage
@@ -335,17 +200,8 @@ skills:
     repository: trailofbits-skills
     path: plugins/spec-to-code-compliance/skills/spec-to-code-compliance
     trust_tier: highest
-    categories: [pr-security-review]
+    categories: [define-and-plan, pr-security-review]
     tags: [spec, compliance]
-
-  - id: tob-firebase-apk-scanner
-    name: Firebase APK Scanner
-    description: Scan Android APKs for Firebase security misconfigurations.
-    repository: trailofbits-skills
-    path: plugins/firebase-apk-scanner/skills/firebase-apk-scanner
-    trust_tier: highest
-    categories: [static-analysis]
-    tags: [android, firebase]
 
   - id: tob-entry-point-analyzer
     name: Entry Point Analyzer
@@ -356,16 +212,7 @@ skills:
     categories: [pr-security-review]
     tags: [audit, scoping]
 
-  - id: tob-burpsuite-project-parser
-    name: Burp Suite Project Parser
-    description: Search and extract data from Burp Suite project files during assessments.
-    repository: trailofbits-skills
-    path: plugins/burpsuite-project-parser/skills/burpsuite-project-parser
-    trust_tier: highest
-    categories: [static-analysis]
-    tags: [burp, pentest]
-
-  # --- Highest trust: Addy Osmani & NVIDIA ---
+  # --- Highest trust: Addy Osmani ---
   - id: addyosmani-security-hardening
     name: Security and Hardening
     description: Apply security hardening patterns during development.
@@ -377,23 +224,265 @@ skills:
 
   - id: addyosmani-code-review-quality
     name: Code Review and Quality
-    description: Quality-focused code review with security awareness.
+    description: Five-axis code review covering correctness, readability, architecture, security, and performance.
     repository: addyosmani-agent-skills
     path: skills/code-review-and-quality
     trust_tier: highest
-    categories: [pr-security-review]
+    categories: [code-quality, pr-security-review]
     tags: [review, quality]
 
-  - id: nemoclaw-maintainer-security-review
-    name: NemoClaw Maintainer Security Review
-    description: Security code review skill for NemoClaw maintainers.
-    repository: nemoclaw
-    path: .agents/skills/nemoclaw-maintainer-security-code-review
+  - id: addyosmani-spec-driven-development
+    name: Spec-Driven Development
+    description: Write a structured spec before code. No CLI required; defers to OpenSpec or another spec system when one is already in the repo.
+    repository: addyosmani-agent-skills
+    path: skills/spec-driven-development
     trust_tier: highest
-    categories: [pr-security-review]
-    tags: [review, nemoclaw]
+    categories: [define-and-plan]
+    tags: [spec, prd, planning]
 
-  # --- High trust: Semgrep & MCP servers ---
+  - id: addyosmani-incremental-implementation
+    name: Incremental Implementation
+    description: Ship thin vertical slices with tests, verification, and rollback-friendly changes.
+    repository: addyosmani-agent-skills
+    path: skills/incremental-implementation
+    trust_tier: highest
+    categories: [code-quality]
+    tags: [implementation, slices, incremental]
+
+  - id: addyosmani-code-simplification
+    name: Code Simplification
+    description: Reduce complexity while preserving behavior. Chesterton's Fence and delete-first simplification.
+    repository: addyosmani-agent-skills
+    path: skills/code-simplification
+    trust_tier: highest
+    categories: [code-quality]
+    tags: [simplify, refactor, maintainability]
+
+  - id: addyosmani-api-and-interface-design
+    name: API and Interface Design
+    description: Contract-first API and module boundary design, including Hyrum's Law and error semantics.
+    repository: addyosmani-agent-skills
+    path: skills/api-and-interface-design
+    trust_tier: highest
+    categories: [architecture]
+    tags: [api, contracts, architecture]
+
+  - id: addyosmani-source-driven-development
+    name: Source-Driven Development
+    description: Ground framework and API decisions in official documentation with citations instead of training-data memory.
+    repository: addyosmani-agent-skills
+    path: skills/source-driven-development
+    trust_tier: highest
+    categories: [architecture]
+    tags: [docs, citations, apis]
+
+  - id: addyosmani-constraint-driven-development
+    name: Constraint-Driven Development
+    description: Interview for a quality bar, write CONSTRAINTS.md, and stop agents from silencing checks to get green.
+    repository: addyosmani-agent-skills
+    path: skills/constraint-driven-development
+    trust_tier: highest
+    categories: [testing]
+    tags: [constraints, quality-bar, ci]
+
+  - id: addyosmani-ci-cd-and-automation
+    name: CI/CD and Automation
+    description: Shift-left pipelines, feature flags, quality gates, and failure feedback loops.
+    repository: addyosmani-agent-skills
+    path: skills/ci-cd-and-automation
+    trust_tier: highest
+    categories: [delivery]
+    tags: [ci, cd, automation]
+
+  - id: addyosmani-git-workflow-and-versioning
+    name: Git Workflow and Versioning
+    description: Trunk-based development, atomic commits, and small reviewable change sizing.
+    repository: addyosmani-agent-skills
+    path: skills/git-workflow-and-versioning
+    trust_tier: highest
+    categories: [delivery]
+    tags: [git, commits, trunk-based]
+
+  - id: addyosmani-observability-and-instrumentation
+    name: Observability and Instrumentation
+    description: Structured logging, RED metrics, OpenTelemetry tracing, and symptom-based alerting as you build.
+    repository: addyosmani-agent-skills
+    path: skills/observability-and-instrumentation
+    trust_tier: highest
+    categories: [delivery]
+    tags: [observability, metrics, tracing]
+
+  # --- Highest trust: Superpowers ---
+  - id: superpowers-test-driven-development
+    name: Test-Driven Development
+    description: RED-GREEN-REFACTOR with an iron law — no production code without a failing test first.
+    repository: obra-superpowers
+    path: skills/test-driven-development
+    trust_tier: highest
+    categories: [testing]
+    tags: [tdd, tests, red-green-refactor]
+
+  - id: superpowers-systematic-debugging
+    name: Systematic Debugging
+    description: Four-phase root-cause process. No fixes until investigation is complete.
+    repository: obra-superpowers
+    path: skills/systematic-debugging
+    trust_tier: highest
+    categories: [debugging]
+    tags: [debugging, root-cause]
+
+  - id: superpowers-brainstorming
+    name: Brainstorming
+    description: Socratic design refinement before any code. Optional visual companion may load a versioned logo unless SUPERPOWERS_DISABLE_TELEMETRY is set.
+    repository: obra-superpowers
+    path: skills/brainstorming
+    trust_tier: highest
+    categories: [define-and-plan]
+    tags: [design, brainstorming, spec]
+
+  - id: superpowers-writing-plans
+    name: Writing Plans
+    description: Break approved designs into bite-sized tasks with file paths, verification steps, and no hidden context.
+    repository: obra-superpowers
+    path: skills/writing-plans
+    trust_tier: highest
+    categories: [define-and-plan]
+    tags: [planning, tasks]
+
+  - id: superpowers-verification-before-completion
+    name: Verification Before Completion
+    description: Require evidence that work is actually done before claiming completion.
+    repository: obra-superpowers
+    path: skills/verification-before-completion
+    trust_tier: highest
+    categories: [testing]
+    tags: [verification, done]
+
+  - id: superpowers-subagent-driven-development
+    name: Subagent-Driven Development
+    description: Dispatch a fresh subagent per task with two-stage spec-compliance and code-quality review.
+    repository: obra-superpowers
+    path: skills/subagent-driven-development
+    trust_tier: highest
+    categories: [define-and-plan]
+    tags: [subagents, implementation, review]
+
+  - id: superpowers-receiving-code-review
+    name: Receiving Code Review
+    description: Respond to review feedback with technical rigor. Verify suggestions instead of rubber-stamping them.
+    repository: obra-superpowers
+    path: skills/receiving-code-review
+    trust_tier: highest
+    categories: [code-quality]
+    tags: [review, feedback]
+
+  # --- Highest trust: GitHub Spec Kit ---
+  - id: github-spec-kit
+    name: Spec Kit
+    description: GitHub's spec-driven toolkit (specify CLI). Constitution, specify, plan, tasks, implement, and converge across 30+ agents. Install with uv tool install specify-cli, then specify init.
+    repository: github-spec-kit
+    path: ""
+    primary_file: README.md
+    trust_tier: highest
+    categories: [define-and-plan]
+    tags: [spec-kit, sdd, specify, github]
+
+  # --- Highest trust: OpenSpec ---
+  - id: openspec
+    name: OpenSpec
+    description: Brownfield spec-driven toolkit. Living specs plus delta changes (propose, apply, archive). Requires the openspec CLI. Install with npm i -g @fission-ai/openspec, then openspec init.
+    repository: fission-openspec
+    path: ""
+    primary_file: README.md
+    trust_tier: highest
+    categories: [define-and-plan]
+    tags: [openspec, sdd, brownfield]
+
+  - id: openspec-propose
+    name: OpenSpec Propose
+    description: Start an OpenSpec change with a proposal and delta specs. Requires the openspec CLI.
+    repository: fission-openspec
+    path: skills/openspec-propose
+    trust_tier: highest
+    categories: [define-and-plan]
+    tags: [openspec, propose, spec]
+
+  - id: openspec-apply-change
+    name: OpenSpec Apply
+    description: Implement an OpenSpec change from its task list. Requires the openspec CLI.
+    repository: fission-openspec
+    path: skills/openspec-apply-change
+    trust_tier: highest
+    categories: [define-and-plan]
+    tags: [openspec, apply, implement]
+
+  - id: openspec-verify-change
+    name: OpenSpec Verify
+    description: Check that an implementation matches OpenSpec change artifacts. Requires the openspec CLI.
+    repository: fission-openspec
+    path: skills/openspec-verify-change
+    trust_tier: highest
+    categories: [testing]
+    tags: [openspec, verify]
+
+  - id: openspec-archive-change
+    name: OpenSpec Archive
+    description: Merge a completed OpenSpec delta into living specs and archive the change. Requires the openspec CLI.
+    repository: fission-openspec
+    path: skills/openspec-archive-change
+    trust_tier: highest
+    categories: [define-and-plan]
+    tags: [openspec, archive, specs]
+
+  # --- Highest trust: Anthropic, Vercel, Cloudflare, NVIDIA ---
+  - id: anthropics-webapp-testing
+    name: Webapp Testing
+    description: Playwright-based UI testing for web apps. Click, fill, screenshot, and catch regressions unit tests miss.
+    repository: anthropics-skills
+    path: skills/webapp-testing
+    trust_tier: highest
+    categories: [testing]
+    tags: [playwright, e2e, ui]
+
+  - id: vercel-react-best-practices
+    name: React Best Practices
+    description: Vercel Engineering React and Next.js performance rules, ranked by impact from waterfalls and bundle size through rendering.
+    repository: vercel-labs-agent-skills
+    path: skills/react-best-practices
+    trust_tier: highest
+    categories: [architecture]
+    tags: [react, nextjs, performance, vercel]
+
+  - id: cloudflare-security-audit
+    name: Cloudflare Security Audit
+    description: Multi-phase security audit with isolated hunters and independent finding verification.
+    repository: cloudflare-security-audit-skill
+    path: skills/security-audit
+    trust_tier: highest
+    categories: [pr-security-review, static-analysis]
+    tags: [audit, cloudflare]
+
+  - id: nvidia-skillspector-inspector
+    name: SkillSpector Inspector
+    description: NVIDIA skill that scans other agent skills for injection, exfiltration, and supply-chain risk.
+    repository: nvidia-skillspector
+    path: skills/skill-inspector
+    trust_tier: highest
+    categories: [agent-skill-security]
+    tags: [skillspector, scanner, nvidia]
+
+  - id: nvidia-skillspector
+    name: SkillSpector
+    description: NVIDIA scanner and MCP server for vetting agent skills before install.
+    repository: nvidia-skillspector
+    path: ""
+    kind: mcp
+    primary_file: README.md
+    trust_tier: highest
+    categories: [agent-skill-security, mcp-integrations]
+    tags: [skillspector, mcp, nvidia]
+
+  # --- High trust: Semgrep, MCP servers, Sentry ---
   - id: semgrep-skills-semgrep
     name: Semgrep
     description: Official Semgrep agent skill for static analysis workflows.
@@ -402,15 +491,6 @@ skills:
     trust_tier: high
     categories: [static-analysis]
     tags: [semgrep, sast]
-
-  - id: semgrep-skills-code-security
-    name: Code Security
-    description: Semgrep code security analysis and remediation guidance.
-    repository: semgrep-skills
-    path: skills/code-security
-    trust_tier: high
-    categories: [static-analysis, pr-security-review]
-    tags: [security, semgrep]
 
   - id: semgrep-skills-llm-security
     name: LLM Security
@@ -454,100 +534,6 @@ skills:
     categories: [mcp-integrations, pr-security-review]
     tags: [github, mcp, secrets]
 
-  # --- Highest trust: OpenAI, Cloudflare, Google, NVIDIA ---
-  - id: openai-security-diff-scan
-    name: Security Diff Scan
-    description: Review a pull request or working-tree diff for security vulnerabilities.
-    repository: openai-plugins
-    path: plugins/codex-security/skills/security-diff-scan
-    trust_tier: highest
-    categories: [pr-security-review]
-    tags: [review, diff, openai]
-
-  - id: openai-security-scan
-    name: Security Scan
-    description: Single-pass security audit of a repository or scoped path.
-    repository: openai-plugins
-    path: plugins/codex-security/skills/security-scan
-    trust_tier: highest
-    categories: [pr-security-review, static-analysis]
-    tags: [audit, openai]
-
-  - id: openai-threat-model
-    name: Threat Model
-    description: Repository-grounded threat model with trust boundaries and attacker goals.
-    repository: openai-plugins
-    path: plugins/codex-security/skills/threat-model
-    trust_tier: highest
-    categories: [pr-security-review]
-    tags: [threat-model, openai]
-
-  - id: openai-propose-security-hardening
-    name: Propose Security Hardening
-    description: Turn scan findings into structural hardening proposals, not one-off patches.
-    repository: openai-plugins
-    path: plugins/codex-security/skills/propose-security-hardening
-    trust_tier: highest
-    categories: [hardening]
-    tags: [hardening, openai]
-
-  - id: cloudflare-security-audit
-    name: Cloudflare Security Audit
-    description: Multi-phase security audit with isolated hunters and independent finding verification.
-    repository: cloudflare-security-audit-skill
-    path: skills/security-audit
-    trust_tier: highest
-    categories: [pr-security-review, static-analysis]
-    tags: [audit, cloudflare]
-
-  - id: google-cloud-waf-security
-    name: Google Cloud Well-Architected Security
-    description: Official Google Cloud Well-Architected Framework security pillar guidance for cloud workloads.
-    repository: google-skills
-    path: skills/cloud/google-cloud-waf-security
-    trust_tier: highest
-    categories: [hardening]
-    tags: [gcp, well-architected, google]
-
-  - id: google-gke-platform-security
-    name: GKE Platform Security
-    description: Harden GKE clusters and platform controls using official Google Cloud skills.
-    repository: google-skills
-    path: skills/cloud/gke-platform-security
-    trust_tier: highest
-    categories: [hardening]
-    tags: [gke, kubernetes, google]
-
-  - id: google-multi-agent-security
-    name: Multi-Agent Security
-    description: Official Google Cloud skill for securing multi-agent systems and agent gateways.
-    repository: google-skills
-    path: skills/cloud/google-cloud-solution-multi-agent-security
-    trust_tier: highest
-    categories: [hardening, agent-skill-security]
-    tags: [agents, gcp, google]
-
-  - id: nvidia-skillspector-inspector
-    name: SkillSpector Inspector
-    description: NVIDIA skill that scans other agent skills for injection, exfiltration, and supply-chain risk.
-    repository: nvidia-skillspector
-    path: skills/skill-inspector
-    trust_tier: highest
-    categories: [agent-skill-security]
-    tags: [skillspector, scanner, nvidia]
-
-  - id: nvidia-skillspector
-    name: SkillSpector
-    description: NVIDIA scanner and MCP server for vetting agent skills before install.
-    repository: nvidia-skillspector
-    path: ""
-    kind: mcp
-    primary_file: README.md
-    trust_tier: highest
-    categories: [agent-skill-security, mcp-integrations]
-    tags: [skillspector, mcp, nvidia]
-
-  # --- High trust: Sentry, Ghost, Cisco, Snyk ---
   - id: sentry-security-review
     name: Sentry Security Review
     description: High-confidence security code review from Sentry, reporting only exploitable findings.
@@ -557,15 +543,6 @@ skills:
     categories: [pr-security-review]
     tags: [review, sentry]
 
-  - id: sentry-skill-scanner
-    name: Sentry Skill Scanner
-    description: Scan agent skills for prompt injection, exfiltration, and dangerous code before install.
-    repository: getsentry-skills
-    path: skills/skill-scanner
-    trust_tier: high
-    categories: [agent-skill-security]
-    tags: [scanner, skills, sentry]
-
   - id: sentry-gha-security-review
     name: GitHub Actions Security Review
     description: Exploitation-focused review of GitHub Actions workflows for pwn requests and token theft.
@@ -574,96 +551,3 @@ skills:
     trust_tier: high
     categories: [hardening, pr-security-review]
     tags: [github-actions, ci, sentry]
-
-  - id: ghost-scan-code
-    name: Ghost Scan Code
-    description: Ghost Security SAST skill for AI-powered detection of code security issues.
-    repository: ghostsecurity-skills
-    path: plugins/ghost/skills/scan-code
-    trust_tier: high
-    categories: [static-analysis, pr-security-review]
-    tags: [sast, ghost]
-
-  - id: ghost-scan-secrets
-    name: Ghost Scan Secrets
-    description: Ghost Security skill for contextual assessment of detected secrets and credentials.
-    repository: ghostsecurity-skills
-    path: plugins/ghost/skills/scan-secrets
-    trust_tier: high
-    categories: [pr-security-review]
-    tags: [secrets, ghost]
-
-  - id: ghost-scan-deps
-    name: Ghost Scan Deps
-    description: Ghost Security SCA skill for exploitability analysis of dependency vulnerabilities.
-    repository: ghostsecurity-skills
-    path: plugins/ghost/skills/scan-deps
-    trust_tier: high
-    categories: [dependabot-prs, static-analysis]
-    tags: [sca, dependencies, ghost]
-
-  - id: ghost-validate
-    name: Ghost Validate
-    description: Ghost Security DAST skill that dynamically validates findings against a live application.
-    repository: ghostsecurity-skills
-    path: plugins/ghost/skills/validate
-    trust_tier: high
-    categories: [pr-security-review]
-    tags: [dast, ghost]
-
-  - id: cisco-skill-scanner
-    name: Cisco Skill Scanner
-    description: Cisco AI Defense scanner for prompt injection, exfiltration, and malicious code in agent skills.
-    repository: cisco-skill-scanner
-    path: ""
-    primary_file: README.md
-    trust_tier: high
-    categories: [agent-skill-security]
-    tags: [scanner, cisco, sarif]
-
-  - id: snyk-agent-scan
-    name: Snyk Agent Scan
-    description: Snyk scanner for prompt injection and malware in agent skills, MCP servers, and agent configs.
-    repository: snyk-agent-scan
-    path: ""
-    primary_file: README.md
-    trust_tier: high
-    categories: [agent-skill-security, mcp-integrations]
-    tags: [scanner, snyk, mcp]
-
-  # --- Medium trust ---
-  - id: coderabbit-autofix
-    name: CodeRabbit Autofix
-    description: Automated fix suggestions for code review findings.
-    repository: coderabbit-skills
-    path: skills/autofix
-    trust_tier: medium
-    categories: [pr-security-review]
-    tags: [autofix, review]
-
-  - id: coderabbit-code-review
-    name: CodeRabbit Code Review
-    description: AI-assisted code review skill for pull requests.
-    repository: coderabbit-skills
-    path: skills/code-review
-    trust_tier: medium
-    categories: [pr-security-review]
-    tags: [review, pr]
-
-  - id: secops-secrets-gitleaks
-    name: Secrets — Gitleaks
-    description: DevSecOps skill for secret scanning with Gitleaks.
-    repository: secops-agent-kit
-    path: skills/devsecops/secrets-gitleaks
-    trust_tier: medium
-    categories: [pr-security-review]
-    tags: [gitleaks, secrets]
-
-  - id: anthropic-gitleaks-scanning
-    name: Secret Scanning with Gitleaks
-    description: Implement secret scanning workflows using Gitleaks.
-    repository: anthropic-cybersecurity-skills
-    path: skills/implementing-secret-scanning-with-gitleaks
-    trust_tier: medium
-    categories: [pr-security-review]
-    tags: [gitleaks, secrets]
