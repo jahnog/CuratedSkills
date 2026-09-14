@@ -4,6 +4,7 @@ import {
   folderUrlFromSkillFile,
   loadCatalog,
   rawUrlFromSkillFile,
+  validateFeaturedSet,
   validateSkillEntry,
 } from './lib/catalog.mjs';
 import { checkUrl } from './lib/fetch.mjs';
@@ -40,6 +41,11 @@ async function main() {
         errors: [`primary file not reachable: ${rawUrl}`],
       });
     }
+  }
+
+  const featuredErrors = validateFeaturedSet(skills);
+  if (featuredErrors.length > 0) {
+    failures.push({ id: 'featured', errors: featuredErrors });
   }
 
   if (failures.length > 0) {

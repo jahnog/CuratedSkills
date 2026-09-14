@@ -34,21 +34,6 @@ async function mapWithConcurrency(items, concurrency, mapper) {
   return results;
 }
 
-function buildSearchText(skill, frontmatter, body) {
-  const parts = [
-    skill.name,
-    skill.description,
-    skill.id,
-    ...(skill.tags ?? []),
-    ...(skill.categories ?? []),
-    frontmatter.description,
-    frontmatter.name,
-    body,
-  ];
-
-  return parts.filter(Boolean).join('\n').replace(/\s+/g, ' ').trim();
-}
-
 async function buildEntry(skill, repositories, tiers, categories) {
   const schemaErrors = validateSkillEntry(skill, repositories, tiers, categories);
   if (schemaErrors.length > 0) {
@@ -97,7 +82,7 @@ async function buildEntry(skill, repositories, tiers, categories) {
     skill_file_url: skillFileUrl,
     folder_url: folderUrl,
     repo_url: repo.url,
-    search_text: buildSearchText(skill, frontmatter, content),
+    featured_order: Number.isInteger(skill.featured_order) ? skill.featured_order : null,
   };
 }
 
@@ -121,9 +106,14 @@ async function main() {
   };
 
   await mkdir(OUTPUT_DIR, { recursive: true });
-  await writeFile(join(OUTPUT_DIR, 'index.json'), `${JSON.stringify(index, null, 2)}\n`);
+  const json = `${JSON.stringify(index, null, 2)}\n`;
+  await writeFile(join(OUTPUT_DIR, 'index.json'), json);
+  await writeFile(
+    join(OUTPUT_DIR, 'index.js'),
+    `globalThis.__CURATED_SKILLS_INDEX__ = ${JSON.stringify(index)};\n`,
+  );
 
-  console.log(`Wrote ${join('docs/data/index.json')} (${entries.length} entries).`);
+  console.log(`Wrote docs/data/index.json and docs/data/index.js (${entries.length} entries).`);
 }
 
 main().catch((error) => {

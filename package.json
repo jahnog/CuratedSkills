@@ -9,6 +9,8 @@
     "build:index": "node scripts/build-index.mjs",
     "build:site": "node scripts/build-site.mjs",
     "build": "npm run validate && npm run build:index && npm run build:site",
+    "preview": "node scripts/preview.mjs",
+    "test": "node scripts/test-search.mjs",
     "vendor": "cp node_modules/minisearch/dist/umd/index.js web/vendor/minisearch.min.js"
   },
   "engines": {

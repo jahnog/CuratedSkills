@@ -80,6 +80,7 @@ skills:
     trust_tier: highest
     categories: [architecture]
     tags: [onboarding, architecture, documentation]
+    featured_order: 1
 
   # --- Highest trust: Anthropic action ---
   - id: claude-code-security-review
@@ -230,6 +231,7 @@ skills:
     trust_tier: highest
     categories: [code-quality, pr-security-review]
     tags: [review, quality]
+    featured_order: 10
 
   - id: addyosmani-spec-driven-development
     name: Spec-Driven Development
@@ -239,6 +241,7 @@ skills:
     trust_tier: highest
     categories: [define-and-plan]
     tags: [spec, prd, planning]
+    featured_order: 2
 
   - id: addyosmani-incremental-implementation
     name: Incremental Implementation
@@ -248,6 +251,7 @@ skills:
     trust_tier: highest
     categories: [code-quality]
     tags: [implementation, slices, incremental]
+    featured_order: 4
 
   - id: addyosmani-code-simplification
     name: Code Simplification
@@ -257,6 +261,7 @@ skills:
     trust_tier: highest
     categories: [code-quality]
     tags: [simplify, refactor, maintainability]
+    featured_order: 9
 
   - id: addyosmani-api-and-interface-design
     name: API and Interface Design
@@ -284,6 +289,7 @@ skills:
     trust_tier: highest
     categories: [testing]
     tags: [constraints, quality-bar, ci]
+    featured_order: 8
 
   - id: addyosmani-ci-cd-and-automation
     name: CI/CD and Automation
@@ -321,6 +327,7 @@ skills:
     trust_tier: highest
     categories: [testing]
     tags: [tdd, tests, red-green-refactor]
+    featured_order: 5
 
   - id: superpowers-systematic-debugging
     name: Systematic Debugging
@@ -330,6 +337,7 @@ skills:
     trust_tier: highest
     categories: [debugging]
     tags: [debugging, root-cause]
+    featured_order: 6
 
   - id: superpowers-brainstorming
     name: Brainstorming
@@ -348,6 +356,7 @@ skills:
     trust_tier: highest
     categories: [define-and-plan]
     tags: [planning, tasks]
+    featured_order: 3
 
   - id: superpowers-verification-before-completion
     name: Verification Before Completion
@@ -357,6 +366,7 @@ skills:
     trust_tier: highest
     categories: [testing]
     tags: [verification, done]
+    featured_order: 7
 
   - id: superpowers-subagent-driven-development
     name: Subagent-Driven Development

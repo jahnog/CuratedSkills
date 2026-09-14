@@ -89,6 +89,19 @@ export function parseFrontmatter(text) {
   return { frontmatter, body: match[2].trim() };
 }
 
+export const FEATURED_SKILL_IDS = [
+  'awesome-copilot-acquire-codebase-knowledge',
+  'addyosmani-spec-driven-development',
+  'superpowers-writing-plans',
+  'addyosmani-incremental-implementation',
+  'superpowers-test-driven-development',
+  'superpowers-systematic-debugging',
+  'superpowers-verification-before-completion',
+  'addyosmani-constraint-driven-development',
+  'addyosmani-code-simplification',
+  'addyosmani-code-review-quality',
+];
+
 export function validateSkillEntry(skill, repositories, tiers, categories) {
   const errors = [];
 
@@ -109,6 +122,50 @@ export function validateSkillEntry(skill, repositories, tiers, categories) {
       if (!categories.has(categoryId)) {
         errors.push(`unknown category: ${categoryId}`);
       }
+    }
+  }
+
+  if (skill.featured_order != null) {
+    const order = skill.featured_order;
+    if (!Number.isInteger(order) || order < 1 || order > FEATURED_SKILL_IDS.length) {
+      errors.push(
+        `featured_order must be an integer 1-${FEATURED_SKILL_IDS.length}, got ${JSON.stringify(order)}`,
+      );
+    }
+  }
+
+  return errors;
+}
+
+export function validateFeaturedSet(skills) {
+  const errors = [];
+  const featured = skills.filter((skill) => skill.featured_order != null);
+  const byOrder = new Map();
+
+  for (const skill of featured) {
+    const order = skill.featured_order;
+    if (byOrder.has(order)) {
+      errors.push(
+        `duplicate featured_order ${order}: ${byOrder.get(order)} and ${skill.id}`,
+      );
+    } else {
+      byOrder.set(order, skill.id);
+    }
+  }
+
+  if (featured.length !== FEATURED_SKILL_IDS.length) {
+    errors.push(
+      `expected ${FEATURED_SKILL_IDS.length} featured skills, found ${featured.length}`,
+    );
+  }
+
+  for (const [index, expectedId] of FEATURED_SKILL_IDS.entries()) {
+    const order = index + 1;
+    const actualId = byOrder.get(order);
+    if (actualId !== expectedId) {
+      errors.push(
+        `featured_order ${order} must be ${expectedId}, got ${actualId ?? 'missing'}`,
+      );
     }
   }
 
