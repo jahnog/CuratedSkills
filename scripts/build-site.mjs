@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { cp, mkdir, readdir, stat } from 'node:fs/promises';
+import { cp, mkdir, readdir, stat, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { ROOT } from './lib/catalog.mjs';
 
@@ -39,7 +39,13 @@ async function main() {
     process.exit(1);
   }
 
+  if (!(await exists(join(DOCS_DIR, 'data', 'index.js')))) {
+    console.error('Missing docs/data/index.js — run build:index first.');
+    process.exit(1);
+  }
+
   await copyWebAssets();
+  await writeFile(join(DOCS_DIR, '.nojekyll'), '');
   console.log('Copied web assets to docs/.');
 }
 

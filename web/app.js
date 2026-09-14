@@ -1,3 +1,21 @@
+const REPO_URL = 'https://github.com/jahnog/CuratedSkills';
+
+// Keep in sync with scripts/test-search.mjs
+const SEARCH_OPTIONS = {
+  fields: ['name', 'description', 'tags', 'categories', 'id'],
+  storeFields: ['id'],
+  processTerm(term) {
+    const normalized = term.toLowerCase();
+    return normalized.length < 2 ? null : normalized;
+  },
+  searchOptions: {
+    boost: { name: 3, id: 2, tags: 2, description: 1.5, categories: 1.2 },
+    prefix: true,
+    combineWith: 'AND',
+    fuzzy: (term) => (term.length > 3 ? 0.2 : null),
+  },
+};
+
 const state = {
   index: null,
   miniSearch: null,
@@ -14,10 +32,24 @@ const elements = {
   emptyState: document.getElementById('empty-state'),
   resultsMeta: document.getElementById('results-meta'),
   themeToggle: document.getElementById('theme-toggle'),
+  repoLink: document.getElementById('repo-link'),
 };
 
 function tierBadgeClass(tierId) {
   return `badge tier-${tierId}`;
+}
+
+function isFeatured(skill) {
+  return Number.isInteger(skill.featured_order);
+}
+
+function defaultSort(a, b) {
+  const aFeatured = isFeatured(a);
+  const bFeatured = isFeatured(b);
+  if (aFeatured && bFeatured) return a.featured_order - b.featured_order;
+  if (aFeatured) return -1;
+  if (bFeatured) return 1;
+  return a.name.localeCompare(b.name);
 }
 
 function initTheme() {
@@ -85,17 +117,26 @@ function matchesFilters(skill) {
   return true;
 }
 
+function documentsForIndex(skills) {
+  return skills.map((skill) => ({
+    id: skill.id,
+    name: skill.name,
+    description: skill.description ?? '',
+    tags: (skill.tags ?? []).join(' '),
+    categories: (skill.categories ?? []).join(' '),
+  }));
+}
+
 function getVisibleSkills() {
   const trimmed = state.query.trim();
-  let skills = state.index.skills;
+  let skills;
 
   if (trimmed) {
-    const results = state.miniSearch.search(trimmed, {
-      prefix: true,
-      fuzzy: 0.15,
-    });
-    const ids = new Set(results.map((result) => result.id));
-    skills = skills.filter((skill) => ids.has(skill.id));
+    const results = state.miniSearch.search(trimmed);
+    const byId = new Map(state.index.skills.map((skill) => [skill.id, skill]));
+    skills = results.map((result) => byId.get(result.id)).filter(Boolean);
+  } else {
+    skills = [...state.index.skills].sort(defaultSort);
   }
 
   return skills.filter(matchesFilters);
@@ -120,6 +161,9 @@ function renderCard(skill) {
   card.title = `Open ${skill.name} folder on GitHub`;
 
   const tierClass = tierBadgeClass(skill.trust_tier);
+  const featuredPill = isFeatured(skill)
+    ? '<span class="meta-pill featured-pill">Featured</span>'
+    : '';
 
   card.innerHTML = `
     <div class="card-header">
@@ -128,6 +172,7 @@ function renderCard(skill) {
     </div>
     <p class="card-description">${escapeHtml(skill.description)}</p>
     <div class="card-meta">
+      ${featuredPill}
       ${skill.category_labels.map((label) => `<span class="meta-pill">${escapeHtml(label)}</span>`).join('')}
       ${skill.tags.slice(0, 3).map((tag) => `<span class="meta-pill">${escapeHtml(tag)}</span>`).join('')}
     </div>
@@ -165,26 +210,16 @@ function render() {
 }
 
 function initSearch() {
-  state.miniSearch = new MiniSearch({
-    fields: ['name', 'description', 'search_text', 'tags'],
-    storeFields: ['id'],
-    searchOptions: {
-      boost: { name: 3, tags: 2, description: 1.5 },
-    },
-  });
-
-  state.miniSearch.addAll(
-    state.index.skills.map((skill) => ({
-      id: skill.id,
-      name: skill.name,
-      description: skill.description,
-      search_text: skill.search_text,
-      tags: skill.tags.join(' '),
-    })),
-  );
+  state.miniSearch = new MiniSearch(SEARCH_OPTIONS);
+  state.miniSearch.addAll(documentsForIndex(state.index.skills));
 }
 
 async function loadIndex() {
+  if (globalThis.__CURATED_SKILLS_INDEX__) {
+    state.index = globalThis.__CURATED_SKILLS_INDEX__;
+    return;
+  }
+
   const response = await fetch('./data/index.json');
   if (!response.ok) {
     throw new Error(`Failed to load index: HTTP ${response.status}`);
@@ -194,6 +229,9 @@ async function loadIndex() {
 
 async function main() {
   initTheme();
+  if (elements.repoLink) {
+    elements.repoLink.href = REPO_URL;
+  }
   elements.themeToggle.addEventListener('click', toggleTheme);
   elements.search.addEventListener('input', (event) => {
     state.query = event.target.value;
