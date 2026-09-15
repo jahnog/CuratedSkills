@@ -51,3 +51,4 @@ The site is built and published by `.github/workflows/build-and-deploy.yml` on p
 
 1. Settings → Pages → Source: **GitHub Actions** (not “Deploy from a branch /docs”; `docs/` is generated and gitignored)
 2. Live URL: https://jahnog.github.io/CuratedSkills/
+3. Production visits are recorded cookie-less in Matomo; `npm run preview` does not track.

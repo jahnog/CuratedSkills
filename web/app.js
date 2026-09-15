@@ -16,13 +16,29 @@ const SEARCH_OPTIONS = {
   },
 };
 
+const SEARCH_TRACK_DELAY_MS = 500;
+
 const state = {
   index: null,
   miniSearch: null,
   query: '',
   activeTiers: new Set(),
   activeCategories: new Set(),
+  searchTrackTimer: 0,
+  lastTrackedQuery: '',
 };
+
+function analyticsApi() {
+  return (
+    window.CuratedSkillsAnalytics || {
+      trackSearch() {},
+      trackSiteSearch() {},
+      trackEvent() {},
+      setTheme() {},
+      trackSkill() {},
+    }
+  );
+}
 
 const elements = {
   search: document.getElementById('search'),
@@ -69,6 +85,8 @@ function toggleTheme() {
   document.documentElement.dataset.theme = next;
   localStorage.setItem('curated-skills-theme', next);
   updateThemeIcon(next);
+  analyticsApi().setTheme(next);
+  analyticsApi().trackEvent('ui', 'theme_toggle', next);
 }
 
 function createChip(label, value, group) {
@@ -80,12 +98,15 @@ function createChip(label, value, group) {
   button.dataset.group = group;
   button.addEventListener('click', () => {
     const set = group === 'tier' ? state.activeTiers : state.activeCategories;
+    const action = group === 'tier' ? 'filter_tier' : 'filter_category';
     if (set.has(value)) {
       set.delete(value);
       button.classList.remove('active');
+      analyticsApi().trackEvent('catalog', action, value, 0);
     } else {
       set.add(value);
       button.classList.add('active');
+      analyticsApi().trackEvent('catalog', action, value, 1);
     }
     render();
   });
@@ -186,7 +207,14 @@ function renderCard(skill) {
   fileLink.addEventListener('click', (event) => {
     event.preventDefault();
     event.stopPropagation();
+    flushSearchTracking();
+    analyticsApi().trackSkill('open_file', skill.id, skill.categories && skill.categories[0]);
     window.open(skill.skill_file_url, '_blank', 'noopener,noreferrer');
+  });
+
+  card.addEventListener('click', () => {
+    flushSearchTracking();
+    analyticsApi().trackSkill('open_folder', skill.id, skill.categories && skill.categories[0]);
   });
 
   return card;
@@ -199,6 +227,35 @@ function escapeHtml(value) {
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;')
     .replaceAll("'", '&#39;');
+}
+
+function sendSearchTracking() {
+  const trimmed = state.query.trim();
+  if (trimmed.length < 2) {
+    state.lastTrackedQuery = '';
+    return;
+  }
+  if (state.lastTrackedQuery === trimmed) return;
+  state.lastTrackedQuery = trimmed;
+  analyticsApi().trackSearch(trimmed, getVisibleSkills().length);
+}
+
+function flushSearchTracking() {
+  if (state.searchTrackTimer) {
+    clearTimeout(state.searchTrackTimer);
+    state.searchTrackTimer = 0;
+  }
+  sendSearchTracking();
+}
+
+function scheduleSearchTracking() {
+  if (state.searchTrackTimer) {
+    clearTimeout(state.searchTrackTimer);
+  }
+  state.searchTrackTimer = setTimeout(() => {
+    state.searchTrackTimer = 0;
+    sendSearchTracking();
+  }, SEARCH_TRACK_DELAY_MS);
 }
 
 function render() {
@@ -236,6 +293,15 @@ async function main() {
   elements.search.addEventListener('input', (event) => {
     state.query = event.target.value;
     render();
+    scheduleSearchTracking();
+  });
+  elements.search.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      flushSearchTracking();
+    }
+  });
+  elements.search.addEventListener('blur', () => {
+    flushSearchTracking();
   });
 
   await loadIndex();
