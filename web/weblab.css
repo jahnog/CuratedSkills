@@ -101,11 +101,6 @@
   gap: var(--wl-space-6);
 }
 
-/* Single-card pages — sign-in, confirmations — that should not stretch to --wl-max. */
-.wl-shell-narrow {
-  max-width: 34rem;
-}
-
 /* ---------- Chrome ----------
    Topbar and footer are hairline bars, not floating cards.
    Add .wl-boxed to either to restore the card treatment. */
@@ -576,6 +571,14 @@
   max-width: var(--wl-max);
   margin-inline: auto;
   min-height: 100dvh;
+}
+
+/* Single-card pages — sign-in, confirmations — that should not stretch to
+   --wl-max. Declared after the fill rules above, which re-assert --wl-max at
+   the same specificity. */
+.wl-shell-narrow,
+.wl-shell.wl-shell-narrow:has(> .wl-main) {
+  max-width: 34rem;
 }
 
 .wl-shell.wl-fill > .wl-topbar,
