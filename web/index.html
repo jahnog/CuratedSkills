@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" class="wl-page" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,14 +18,14 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div class="app">
+    <div class="wl-shell app">
       <header class="header">
-        <div class="header-top">
-          <div class="brand">
+        <div class="header-top wl-topbar">
+          <div class="brand wl-brand">
             <h1>CuratedSkills</h1>
             <p class="tagline">High-trust agent skills for software engineering and security, curated for impact</p>
           </div>
-          <button id="theme-toggle" class="icon-btn" type="button" aria-label="Toggle theme">
+          <button id="theme-toggle" class="icon-btn wl-btn" type="button" aria-label="Toggle theme">
             <span class="theme-icon" aria-hidden="true">☀</span>
           </button>
         </div>
@@ -52,11 +52,11 @@
       </header>
 
       <main>
-        <div id="skill-grid" class="skill-grid" role="list"></div>
+        <div id="skill-grid" class="skill-grid wl-card-grid" role="list"></div>
         <p id="empty-state" class="empty-state" hidden>No skills match your filters.</p>
       </main>
 
-      <footer class="footer">
+      <footer class="footer wl-footer">
         <p>
           Primary link opens the skill folder on GitHub.
           <a href="https://github.com/jahnog/CuratedSkills" id="repo-link" target="_blank" rel="noopener noreferrer"

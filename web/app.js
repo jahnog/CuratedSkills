@@ -92,7 +92,7 @@ function toggleTheme() {
 function createChip(label, value, group) {
   const button = document.createElement('button');
   button.type = 'button';
-  button.className = 'chip';
+  button.className = 'chip wl-chip';
   button.textContent = label;
   button.dataset.value = value;
   button.dataset.group = group;
@@ -174,7 +174,7 @@ function primaryFileLabel(skill) {
 
 function renderCard(skill) {
   const card = document.createElement('a');
-  card.className = 'skill-card';
+  card.className = 'skill-card wl-panel';
   card.href = skill.folder_url;
   card.target = '_blank';
   card.rel = 'noopener noreferrer';

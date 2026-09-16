@@ -16,6 +16,8 @@
   --tier-medium: var(--wl-gold);
   --font: var(--wl-font);
   --mono: ui-monospace, "SF Mono", "Cascadia Code", monospace;
+  /* This registry is 1120px wide, not the template's 1500px default. */
+  --wl-max: 1120px;
 }
 
 [data-theme="light"] {
@@ -29,6 +31,21 @@
   --accent: #0969da;
   --accent-soft: rgba(9, 105, 218, 0.1);
   --shadow: 0 8px 24px rgba(31, 35, 40, 0.08);
+
+  /* weblab is dark-only, so wl-* components would stay dark while the rest
+     of the page went light. Re-point the template's own tokens, not just
+     the local aliases, so .wl-panel / .wl-chip / .wl-topbar follow too. */
+  --wl-bg: #f6f8fa;
+  --wl-surface: #ffffff;
+  --wl-surface-strong: #f0f3f6;
+  --wl-text: #1f2328;
+  --wl-muted: #656d76;
+  --wl-link: #0969da;
+  --wl-gold: #0969da;
+  --wl-on-gold: #ffffff;
+  --wl-blue: #0969da;
+  --wl-border: #d0d7de;
+  --wl-shadow: 0 8px 24px rgba(31, 35, 40, 0.08);
 }
 
 *,
@@ -61,18 +78,10 @@ a:hover {
   text-decoration: underline;
 }
 
-.app {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 2rem 1.25rem 3rem;
-}
+/* .app is a .wl-shell; width, centring and padding come from the template. */
 
 .header-top {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--wl-space-6);
 }
 
 .brand h1 {
@@ -149,13 +158,9 @@ a:hover {
   gap: 0.5rem;
 }
 
+/* .chip is a .wl-chip; only the interactive bits are local. */
 .chip {
-  border: 1px solid var(--border);
-  background: var(--bg-elevated);
   color: var(--text-muted);
-  border-radius: 999px;
-  padding: 0.35rem 0.8rem;
-  font-size: 0.82rem;
   cursor: pointer;
   transition: all 0.15s ease;
 }
@@ -177,22 +182,18 @@ a:hover {
   font-size: 0.85rem;
 }
 
+/* .skill-grid is a .wl-card-grid; it only needs a narrower minimum track. */
 .skill-grid {
-  display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
-  gap: 1rem;
-  margin-top: 1.5rem;
+  margin-top: var(--wl-space-6);
 }
 
+/* .skill-card is a .wl-panel; surface, border, radius, shadow and padding
+   all come from the template. */
 .skill-card {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  padding: 1.1rem;
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  gap: var(--wl-space-3);
   cursor: pointer;
   transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
   text-decoration: none;
@@ -315,12 +316,9 @@ a:hover {
   padding: 3rem 1rem;
 }
 
+/* .footer is a .wl-footer; it only needs the extra top margin. */
 .footer {
-  margin-top: 3rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border);
-  color: var(--text-muted);
-  font-size: 0.85rem;
+  margin-top: var(--wl-space-12);
 }
 
 @media (max-width: 640px) {
