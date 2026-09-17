@@ -1,13 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" class="wl-page" data-theme="dark">
+<html lang="en" class="wl-page">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CuratedSkills — Software Engineering & Security Agent Skills</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#050821" />
+    <title>CuratedSkills</title>
     <meta
       name="description"
-      content="A curated registry of high-trust agent skills for software engineering and security."
+      content="A curated, searchable registry of high-trust agent skills for software engineering and security, with trust tiers and categories."
     />
+    <link rel="icon" href="./favicon.ico" sizes="48x48" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="CuratedSkills" />
+    <meta
+      property="og:description"
+      content="A curated, searchable registry of high-trust agent skills for software engineering and security."
+    />
+    <meta property="og:url" content="https://jahnog.github.io/CuratedSkills/" />
+    <meta property="og:image" content="https://jahnog.github.io/CuratedSkills/og.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -18,50 +31,70 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div class="wl-shell app">
-      <header class="header">
-        <div class="header-top wl-topbar">
-          <div class="brand wl-brand">
-            <h1>CuratedSkills</h1>
-            <p class="tagline">High-trust agent skills for software engineering and security, curated for impact</p>
-          </div>
-          <button id="theme-toggle" class="icon-btn wl-btn" type="button" aria-label="Toggle theme">
-            <span class="theme-icon" aria-hidden="true">☀</span>
-          </button>
+    <div class="wl-shell wl-fill">
+      <header class="wl-topbar">
+        <div class="wl-brand">
+          <p class="wl-kicker">Skill registry</p>
+          <h1 class="wl-title">CuratedSkills</h1>
+          <p class="wl-subtitle">
+            A curated, searchable registry of high-trust agent skills for software engineering and security.
+          </p>
         </div>
-
-        <div class="search-row">
-          <label class="search-field" for="search">
-            <span class="search-icon" aria-hidden="true">⌕</span>
-            <input
-              id="search"
-              type="search"
-              placeholder="Search skills, tags, descriptions…"
-              autocomplete="off"
-              spellcheck="false"
-            />
-          </label>
-        </div>
-
-        <div class="filters" id="filters">
-          <div class="filter-group" id="tier-filters"></div>
-          <div class="filter-group" id="category-filters"></div>
-        </div>
-
-        <p class="results-meta" id="results-meta"></p>
+        <nav class="wl-nav" aria-label="Site">
+          <a href="https://jahnog.github.io/">Portfolio</a>
+          <a href="https://github.com/jahnog/CuratedSkills" id="repo-link">Source</a>
+          <a href="https://jahnog.github.io/Curated-Coding-Agent-Skills/">Write-up</a>
+        </nav>
       </header>
 
-      <main>
-        <div id="skill-grid" class="skill-grid wl-card-grid" role="list"></div>
-        <p id="empty-state" class="empty-state" hidden>No skills match your filters.</p>
+      <main class="wl-main" id="main">
+        <section class="search-panel wl-panel" aria-labelledby="search-title">
+          <p class="wl-kicker">Search</p>
+          <h2 class="wl-title" id="search-title">Find a skill</h2>
+          <p class="wl-subtitle">
+            A skill is a reusable instruction set a coding agent can load — a review checklist, a
+            hardening playbook, an MCP server. Each entry links to its folder on GitHub and is
+            rated by how much its source can be trusted.
+          </p>
+          <label class="wl-kicker" for="search">Search skills, tags and descriptions</label>
+          <input
+            id="search"
+            class="wl-input"
+            type="search"
+            placeholder="e.g. dependabot, threat model, spec"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <div class="filters" id="filters">
+            <div class="filter-group">
+              <p class="wl-kicker" id="tier-label">Trust tier</p>
+              <div class="wl-chip-row" id="tier-filters" role="group" aria-labelledby="tier-label"></div>
+            </div>
+            <div class="filter-group">
+              <p class="wl-kicker" id="category-label">Category</p>
+              <div class="wl-chip-row" id="category-filters" role="group" aria-labelledby="category-label"></div>
+            </div>
+          </div>
+          <p class="results-meta wl-subtitle" id="results-meta" aria-live="polite">Loading the catalog…</p>
+        </section>
+
+        <div id="skill-grid" class="skill-grid wl-card-grid"></div>
+        <div id="empty-state" class="wl-note" hidden>
+          No skills match your search and filters.
+          <button class="wl-btn wl-btn-ghost empty-state__reset" id="clear-filters" type="button">Clear filters</button>
+        </div>
+        <p id="load-error" class="wl-note wl-note-danger" hidden></p>
       </main>
 
-      <footer class="footer wl-footer">
+      <footer class="wl-footer">
         <p>
-          Primary link opens the skill folder on GitHub.
-          <a href="https://github.com/jahnog/CuratedSkills" id="repo-link" target="_blank" rel="noopener noreferrer"
-            >View source</a
-          >
+          Part of the portfolio at
+          <a href="https://jahnog.github.io/">jahnog.github.io</a> ·
+          <a href="https://github.com/jahnog/CuratedSkills">Source</a>
+        </p>
+        <p>
+          A card opens the skill folder on GitHub; the small link opens its main file. Catalog is
+          human-edited YAML, built to a static index. Cookieless Matomo, first-party.
         </p>
       </footer>
     </div>

@@ -46,13 +46,19 @@ const elements = {
   categoryFilters: document.getElementById('category-filters'),
   skillGrid: document.getElementById('skill-grid'),
   emptyState: document.getElementById('empty-state'),
+  clearFilters: document.getElementById('clear-filters'),
+  loadError: document.getElementById('load-error'),
   resultsMeta: document.getElementById('results-meta'),
-  themeToggle: document.getElementById('theme-toggle'),
   repoLink: document.getElementById('repo-link'),
 };
 
 function tierBadgeClass(tierId) {
-  return `badge tier-${tierId}`;
+  return `wl-chip badge tier-${tierId}`;
+}
+
+function tierDescription(tierId) {
+  const tier = state.index.meta.tiers.find((t) => t.id === tierId);
+  return tier ? tier.description : '';
 }
 
 function isFeatured(skill) {
@@ -68,44 +74,25 @@ function defaultSort(a, b) {
   return a.name.localeCompare(b.name);
 }
 
-function initTheme() {
-  const saved = localStorage.getItem('curated-skills-theme');
-  const theme = saved === 'light' ? 'light' : 'dark';
-  document.documentElement.dataset.theme = theme;
-  updateThemeIcon(theme);
-}
-
-function updateThemeIcon(theme) {
-  const icon = elements.themeToggle.querySelector('.theme-icon');
-  icon.textContent = theme === 'dark' ? '☀' : '☾';
-}
-
-function toggleTheme() {
-  const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-  document.documentElement.dataset.theme = next;
-  localStorage.setItem('curated-skills-theme', next);
-  updateThemeIcon(next);
-  analyticsApi().setTheme(next);
-  analyticsApi().trackEvent('ui', 'theme_toggle', next);
-}
-
-function createChip(label, value, group) {
+function createChip(label, value, group, description) {
   const button = document.createElement('button');
   button.type = 'button';
-  button.className = 'chip wl-chip';
+  button.className = 'wl-chip wl-chip-btn';
   button.textContent = label;
   button.dataset.value = value;
   button.dataset.group = group;
+  button.setAttribute('aria-pressed', 'false');
+  if (description) button.title = description;
   button.addEventListener('click', () => {
     const set = group === 'tier' ? state.activeTiers : state.activeCategories;
     const action = group === 'tier' ? 'filter_tier' : 'filter_category';
     if (set.has(value)) {
       set.delete(value);
-      button.classList.remove('active');
+      button.setAttribute('aria-pressed', 'false');
       analyticsApi().trackEvent('catalog', action, value, 0);
     } else {
       set.add(value);
-      button.classList.add('active');
+      button.setAttribute('aria-pressed', 'true');
       analyticsApi().trackEvent('catalog', action, value, 1);
     }
     render();
@@ -113,16 +100,28 @@ function createChip(label, value, group) {
   return button;
 }
 
+function clearFilters() {
+  state.activeTiers.clear();
+  state.activeCategories.clear();
+  state.query = '';
+  elements.search.value = '';
+  for (const chip of document.querySelectorAll('#filters [aria-pressed]')) {
+    chip.setAttribute('aria-pressed', 'false');
+  }
+  render();
+  elements.search.focus();
+}
+
 function renderFilters() {
   const { meta } = state.index;
 
   elements.tierFilters.replaceChildren(
-    ...meta.tiers.map((tier) => createChip(tier.label, tier.id, 'tier')),
+    ...meta.tiers.map((tier) => createChip(tier.label, tier.id, 'tier', tier.description)),
   );
 
   elements.categoryFilters.replaceChildren(
     ...meta.categories.map((category) =>
-      createChip(category.label, category.id, 'category'),
+      createChip(category.label, category.id, 'category', category.description),
     ),
   );
 }
@@ -173,46 +172,41 @@ function primaryFileLabel(skill) {
 }
 
 function renderCard(skill) {
-  const card = document.createElement('a');
+  const card = document.createElement('article');
   card.className = 'skill-card wl-panel';
-  card.href = skill.folder_url;
-  card.target = '_blank';
-  card.rel = 'noopener noreferrer';
-  card.setAttribute('role', 'listitem');
-  card.title = `Open ${skill.name} folder on GitHub`;
 
   const tierClass = tierBadgeClass(skill.trust_tier);
   const featuredPill = isFeatured(skill)
-    ? '<span class="meta-pill featured-pill">Featured</span>'
+    ? '<span class="wl-chip meta-pill featured-pill">Featured</span>'
     : '';
 
+  // The title link is stretched over the whole card (see styles.css), so
+  // the card acts as one link while the markup stays valid: no nested <a>.
   card.innerHTML = `
     <div class="card-header">
-      <h2 class="card-title">${escapeHtml(skill.name)}</h2>
-      <span class="${tierClass}">${escapeHtml(skill.trust_label)}</span>
+      <h2 class="card-title">
+        <a class="card-link" data-folder-link href="${escapeHtml(skill.folder_url)}" target="_blank" rel="noopener noreferrer" title="Open ${escapeHtml(skill.name)} folder on GitHub">${escapeHtml(skill.name)}</a>
+      </h2>
+      <span class="${tierClass}" title="${escapeHtml(tierDescription(skill.trust_tier))}">${escapeHtml(skill.trust_label)} trust</span>
     </div>
     <p class="card-description">${escapeHtml(skill.description)}</p>
     <div class="card-meta">
       ${featuredPill}
-      ${skill.category_labels.map((label) => `<span class="meta-pill">${escapeHtml(label)}</span>`).join('')}
-      ${skill.tags.slice(0, 3).map((tag) => `<span class="meta-pill">${escapeHtml(tag)}</span>`).join('')}
+      ${skill.category_labels.map((label) => `<span class="wl-chip meta-pill">${escapeHtml(label)}</span>`).join('')}
+      ${skill.tags.slice(0, 3).map((tag) => `<span class="wl-chip meta-pill">${escapeHtml(tag)}</span>`).join('')}
     </div>
     <div class="card-footer">
       <span class="repo-label">${escapeHtml(`${skill.repository.owner}/${skill.repository.name}`)}</span>
-      <span class="file-link" data-file-link>${escapeHtml(primaryFileLabel(skill))}</span>
+      <a class="file-link" data-file-link href="${escapeHtml(skill.skill_file_url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(primaryFileLabel(skill))}</a>
     </div>
   `;
 
-  const fileLink = card.querySelector('[data-file-link]');
-  fileLink.addEventListener('click', (event) => {
-    event.preventDefault();
-    event.stopPropagation();
+  card.querySelector('[data-file-link]').addEventListener('click', () => {
     flushSearchTracking();
     analyticsApi().trackSkill('open_file', skill.id, skill.categories && skill.categories[0]);
-    window.open(skill.skill_file_url, '_blank', 'noopener,noreferrer');
   });
 
-  card.addEventListener('click', () => {
+  card.querySelector('[data-folder-link]').addEventListener('click', () => {
     flushSearchTracking();
     analyticsApi().trackSkill('open_folder', skill.id, skill.categories && skill.categories[0]);
   });
@@ -263,7 +257,7 @@ function render() {
 
   elements.skillGrid.replaceChildren(...visible.map(renderCard));
   elements.emptyState.hidden = visible.length > 0;
-  elements.resultsMeta.textContent = `${visible.length} of ${state.index.skills.length} skills`;
+  elements.resultsMeta.textContent = `Showing ${visible.length} of ${state.index.skills.length} skills`;
 }
 
 function initSearch() {
@@ -285,11 +279,10 @@ async function loadIndex() {
 }
 
 async function main() {
-  initTheme();
   if (elements.repoLink) {
     elements.repoLink.href = REPO_URL;
   }
-  elements.themeToggle.addEventListener('click', toggleTheme);
+  elements.clearFilters.addEventListener('click', clearFilters);
   elements.search.addEventListener('input', (event) => {
     state.query = event.target.value;
     render();
@@ -312,5 +305,7 @@ async function main() {
 
 main().catch((error) => {
   console.error(error);
-  elements.resultsMeta.textContent = 'Failed to load skill index.';
+  elements.resultsMeta.textContent = '';
+  elements.loadError.textContent = 'The skill catalog could not be loaded. Reload the page or open the source repository.';
+  elements.loadError.hidden = false;
 });

@@ -9,7 +9,7 @@ A curated registry of high-trust agent skills for software engineering and secur
 - Human-edited YAML catalog with trust tiers and categories
 - Client-side catalog search (name, description, tags, categories)
 - Ten featured high-leverage engineering skills pinned at the top of the default view
-- Minimal static UI (dark-first) generated into `docs/` and hosted on GitHub Pages
+- Minimal static UI on the shared portfolio template (`weblab.css`), generated into `docs/` and hosted on GitHub Pages
 - Primary navigation opens the **skill folder** on GitHub; secondary link opens the primary file (`SKILL.md`, `README.md`, or `action.yml`)
 
 ## Quick start
