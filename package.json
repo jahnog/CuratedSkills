@@ -1,6 +1,6 @@
 {
   "name": "curated-skills",
-  "version": "1.3.2",
+  "version": "1.4.0",
   "private": true,
   "type": "module",
   "description": "Curated registry of high-trust software engineering and security agent skills with full-text search.",

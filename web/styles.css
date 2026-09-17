@@ -1,213 +1,76 @@
+/* CuratedSkills — what weblab.css does not cover.
+   Chrome, panels, inputs, chips, notes and the card grid are the template's;
+   this file owns the search panel spacing and the skill card internals. */
+
 :root {
-  color-scheme: dark;
-  --bg: var(--wl-bg);
-  --bg-elevated: var(--wl-surface);
-  --bg-hover: var(--wl-surface-strong);
-  --border: var(--wl-border);
-  --text: var(--wl-text);
-  --text-muted: var(--wl-muted);
-  --accent: var(--wl-gold);
-  --accent-soft: rgba(244, 178, 35, 0.12);
-  --shadow: var(--wl-shadow);
-  --radius: var(--wl-radius);
-  --radius-sm: var(--wl-radius);
-  --tier-highest: var(--wl-success);
-  --tier-high: var(--wl-blue);
-  --tier-medium: var(--wl-gold);
-  --font: var(--wl-font);
-  --mono: ui-monospace, "SF Mono", "Cascadia Code", monospace;
-  /* This registry is 1120px wide, not the template's 1500px default. */
+  /* The registry reads better at a narrower measure than the 1500px default. */
   --wl-max: 1120px;
 }
 
-[data-theme="light"] {
-  color-scheme: light;
-  --bg: #f6f8fa;
-  --bg-elevated: #ffffff;
-  --bg-hover: #f0f3f6;
-  --border: #d0d7de;
-  --text: #1f2328;
-  --text-muted: #656d76;
-  --accent: #0969da;
-  --accent-soft: rgba(9, 105, 218, 0.1);
-  --shadow: 0 8px 24px rgba(31, 35, 40, 0.08);
+/* ---------- Search panel ---------- */
 
-  /* weblab is dark-only, so wl-* components would stay dark while the rest
-     of the page went light. Re-point the template's own tokens, not just
-     the local aliases, so .wl-panel / .wl-chip / .wl-topbar follow too. */
-  --wl-bg: #f6f8fa;
-  --wl-surface: #ffffff;
-  --wl-surface-strong: #f0f3f6;
-  --wl-text: #1f2328;
-  --wl-muted: #656d76;
-  --wl-link: #0969da;
-  --wl-gold: #0969da;
-  --wl-on-gold: #ffffff;
-  --wl-blue: #0969da;
-  --wl-border: #d0d7de;
-  --wl-shadow: 0 8px 24px rgba(31, 35, 40, 0.08);
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  margin: 0;
-  min-height: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
-body {
-  font-family: var(--font);
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.5;
-}
-
-a {
-  color: var(--accent);
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* .app is a .wl-shell; width, centring and padding come from the template. */
-
-.header-top {
-  margin-bottom: var(--wl-space-6);
-}
-
-.brand h1 {
-  margin: 0;
-  font-size: 1.75rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-.tagline {
-  margin: 0.25rem 0 0;
-  color: var(--text-muted);
-  font-size: 0.95rem;
-}
-
-.icon-btn {
-  border: 1px solid var(--border);
-  background: var(--bg-elevated);
-  color: var(--text);
-  border-radius: var(--radius-sm);
-  width: 2.5rem;
-  height: 2.5rem;
-  cursor: pointer;
-  font-size: 1.1rem;
-  transition: background 0.15s ease, border-color 0.15s ease;
-}
-
-.icon-btn:hover {
-  background: var(--bg-hover);
-}
-
-.search-row {
-  margin-bottom: 1rem;
-}
-
-.search-field {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-}
-
-.search-icon {
-  color: var(--text-muted);
-  font-size: 1.1rem;
-}
-
-.search-field input {
-  flex: 1;
-  border: 0;
-  background: transparent;
-  color: var(--text);
-  font: inherit;
-  outline: none;
-}
-
-.search-field input::placeholder {
-  color: var(--text-muted);
+.search-panel {
+  gap: var(--wl-space-4);
 }
 
 .filters {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+  display: grid;
+  gap: var(--wl-space-4);
 }
 
 .filter-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  display: grid;
+  gap: var(--wl-space-2);
 }
 
-/* .chip is a .wl-chip; only the interactive bits are local. */
-.chip {
-  color: var(--text-muted);
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.chip:hover {
-  border-color: var(--accent);
-  color: var(--text);
-}
-
-.chip.active {
-  background: var(--accent-soft);
-  border-color: var(--accent);
-  color: var(--accent);
+.filter-group > .wl-kicker {
+  margin: 0;
 }
 
 .results-meta {
-  margin: 1rem 0 0;
-  color: var(--text-muted);
-  font-size: 0.85rem;
+  margin: 0;
+  font-size: var(--wl-text-sm);
 }
 
-/* .skill-grid is a .wl-card-grid; it only needs a narrower minimum track. */
+/* ---------- Skill cards ---------- */
+
 .skill-grid {
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
-  margin-top: var(--wl-space-6);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
 }
 
-/* .skill-card is a .wl-panel; surface, border, radius, shadow and padding
-   all come from the template. */
+/* A card is a .wl-panel whose title link is stretched over the whole
+   surface (the ::after below), so clicking anywhere opens the folder while
+   the markup stays valid HTML. */
 .skill-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--wl-space-3);
-  cursor: pointer;
-  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.skill-card:hover,
+.skill-card:focus-within {
+  border-color: var(--wl-gold);
+}
+
+.wl-page a.card-link {
+  color: var(--wl-text);
   text-decoration: none;
-  color: inherit;
 }
 
-.skill-card:hover {
-  transform: translateY(-2px);
-  border-color: var(--accent);
-  background: var(--bg-hover);
+.wl-page a.card-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--wl-radius);
 }
 
-.skill-card:focus-visible {
-  outline: 2px solid var(--accent);
+.wl-page a.card-link:focus-visible {
+  outline: none;
+}
+
+.skill-card:has(.card-link:focus-visible) {
+  outline: 2px solid var(--wl-blue);
   outline-offset: 2px;
 }
 
@@ -215,118 +78,111 @@ a:hover {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 0.75rem;
+  gap: var(--wl-space-3);
 }
 
 .card-title {
   margin: 0;
-  font-size: 1rem;
+  font-size: var(--wl-text-lg);
   font-weight: 600;
-  line-height: 1.3;
+  line-height: var(--wl-leading-tight);
 }
 
+/* Trust tier badge: gold outline for the top tier, muted for the rest. */
 .badge {
   flex-shrink: 0;
-  font-size: 0.7rem;
   font-weight: 600;
-  text-transform: uppercase;
   letter-spacing: 0.04em;
-  padding: 0.2rem 0.5rem;
-  border-radius: 999px;
-  border: 1px solid transparent;
+  text-transform: uppercase;
 }
 
 .tier-highest {
-  color: var(--tier-highest);
-  border-color: color-mix(in srgb, var(--tier-highest) 35%, transparent);
-  background: color-mix(in srgb, var(--tier-highest) 12%, transparent);
+  border-color: var(--wl-gold);
+  color: var(--wl-gold);
 }
 
 .tier-high {
-  color: var(--tier-high);
-  border-color: color-mix(in srgb, var(--tier-high) 35%, transparent);
-  background: color-mix(in srgb, var(--tier-high) 12%, transparent);
+  border-color: var(--wl-muted);
+  color: var(--wl-text);
 }
 
 .tier-medium {
-  color: var(--tier-medium);
-  border-color: color-mix(in srgb, var(--tier-medium) 35%, transparent);
-  background: color-mix(in srgb, var(--tier-medium) 12%, transparent);
+  color: var(--wl-muted);
 }
 
 .card-description {
   margin: 0;
-  color: var(--text-muted);
-  font-size: 0.88rem;
+  color: var(--wl-muted);
+  font-size: var(--wl-text-sm);
   flex: 1;
 }
 
 .card-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem;
+  gap: var(--wl-space-2);
 }
 
 .meta-pill {
-  font-size: 0.72rem;
-  padding: 0.15rem 0.45rem;
-  border-radius: 999px;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  color: var(--text-muted);
+  color: var(--wl-muted);
 }
 
 .meta-pill.featured-pill {
-  color: var(--accent);
-  border-color: var(--accent);
-  background: var(--accent-soft);
+  border-color: var(--wl-gold);
+  color: var(--wl-gold);
 }
 
 .card-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.5rem;
+  gap: var(--wl-space-3);
   margin-top: auto;
-  padding-top: 0.25rem;
+  padding-top: var(--wl-space-1);
 }
 
 .repo-label {
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  color: var(--text-muted);
+  font-family: var(--wl-mono);
+  font-size: var(--wl-text-xs);
+  color: var(--wl-muted);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.file-link {
-  font-size: 0.72rem;
-  color: var(--accent);
+/* The secondary link sits above the stretched title link. */
+.wl-page a.file-link {
+  position: relative;
+  z-index: 1;
   flex-shrink: 0;
-}
-
-.file-link:hover {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding-inline: var(--wl-space-2);
+  margin: calc(-1 * var(--wl-space-2)) calc(-1 * var(--wl-space-2)) calc(-1 * var(--wl-space-2)) 0;
+  font-size: var(--wl-text-sm);
+  color: var(--wl-link);
   text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
-.empty-state {
-  text-align: center;
-  color: var(--text-muted);
-  padding: 3rem 1rem;
+.wl-page a.file-link:focus-visible {
+  outline: 2px solid var(--wl-blue);
+  outline-offset: 2px;
+  border-radius: var(--wl-radius);
 }
 
-/* .footer is a .wl-footer; it only needs the extra top margin. */
-.footer {
-  margin-top: var(--wl-space-12);
+/* ---------- Empty state ---------- */
+
+#empty-state {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--wl-space-3);
 }
 
-@media (max-width: 640px) {
-  .app {
-    padding: 1.25rem 1rem 2rem;
-  }
-
-  .skill-grid {
-    grid-template-columns: 1fr;
-  }
+#empty-state[hidden],
+#load-error[hidden] {
+  display: none;
 }
