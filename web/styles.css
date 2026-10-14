@@ -132,6 +132,11 @@
   color: var(--wl-gold);
 }
 
+.meta-pill.origin-pill {
+  border-color: var(--wl-blue);
+  color: var(--wl-text);
+}
+
 .card-footer {
   display: flex;
   align-items: center;
