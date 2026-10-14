@@ -65,16 +65,8 @@ Do not check the license of a dependency.
 ## README and ignore rules
 
 Do this step last.
-The root README states what the project is.
-The root README states how you build the project.
-The root README states how you run the unit tests that exist.
-The root README states the license that applies.
-If no test command exists, the README states that no test command exists.
-
-Do not invent a runner.
-Remove each credential from the README.
-Keep each build instruction that still works.
-Keep each test instruction that still works.
+Read [readme.md](readme.md) for the README edit.
+That file supplies the project description, the advantages, the commands, the deduplication, and the review.
 
 Add each coverage report to the ignore rules.
 Add each HTML report to the ignore rules.

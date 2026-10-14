@@ -3,12 +3,16 @@ name: unit-tests-coverage-mutation
 description: >
   Add, reorganize, or simplify unit tests and keep every case. Write
   Cobertura XML and HTML coverage reports, and run incremental mutation
-  testing. Use this skill for that work in a local repository. When the
-  user will publish the repository on GitHub, also scan the history for
-  secrets, check the license, and make the README and ignore rules safe
-  to publish. Do not use this skill for UI or end-to-end tests, diagnosing
-  an existing failure, changing continuous integration, or writing
-  production code from the tests.
+  testing. Update the repository README so a newcomer can see what the
+  project is, which advantages it provides, and the commands to install,
+  uninstall, run, test, debug, run mutation testing, and generate
+  reports. Deduplicate that README, put each fact in one place, and
+  review it before you finish. Use this skill for that work in a local
+  repository. When the user will publish the repository on GitHub, also
+  scan the history for secrets, check the license, and make the README
+  and ignore rules safe to publish. Do not use this skill for UI or
+  end-to-end tests, diagnosing an existing failure, changing continuous
+  integration, or writing production code from the tests.
 license: MIT
 ---
 
@@ -41,6 +45,7 @@ A license stop stops the whole request.
 Do no other edit before you complete the secret scan.
 Do no other edit before you complete the license check.
 Write the README after any test work.
+Read [references/readme.md](references/readme.md) for that write.
 Write the ignore rules after any test work.
 
 ## What already exists
@@ -115,8 +120,10 @@ The suite passes before the next step starts.
    Read [references/coverage-reports.md](references/coverage-reports.md).
 5. Run incremental mutation testing.
    Read [references/mutation-testing.md](references/mutation-testing.md).
-6. When the user also asks you to publish, write the README.
-   When the user also asks you to publish, write the ignore rules.
+6. Update the repository README.
+   Read [references/readme.md](references/readme.md).
+   Review that README before you finish.
+7. When the user also asks you to publish, write the ignore rules.
    Read [references/public-github.md](references/public-github.md).
 
 If the user asks you to do only some of these steps, do only those steps.
@@ -165,11 +172,23 @@ Record these items at the end.
   Record the path of the state file.
   Record the scope.
   Record the misses that the tool documentation describes for a later run.
+- Record the README results when you did that work.
+  Record the path.
+  Record whether you created the file or edited it.
+  Record the pre-edit fact count.
+  Record each duplicate that you removed and the kept fact.
+  Record each command, its source, and its directory.
+  Record each further advantage and its source.
+  When no further advantage exists, record that gap.
+  Record each topic that has no command.
+  Record the closed-book restatement.
+  Record the syntactic review result.
+  Record the semantic review result.
+  Record a credential that you removed from the README.
 - Record publication results only when you did that work.
   Record each secret that you found.
   If you found no secret, record that fact.
   Record the status of the license.
-  Record each change to the README.
   Record each change to the ignore rules.
 - Record each refusal.
   Record the reason for the refusal.
