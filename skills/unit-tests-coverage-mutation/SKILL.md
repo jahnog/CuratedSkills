@@ -1,30 +1,14 @@
 ---
 name: unit-tests-coverage-mutation
 description: >
-  Add missing unit tests.
-  Reorganize the unit tests.
-  Simplify the unit tests.
-  Keep each case when you reorganize or when you simplify.
-  Write a Cobertura XML report for coverage.
-  Write an HTML report for coverage.
-
-  Run incremental mutation testing.
-  A later run does not repeat a full analysis.
-  Use this skill when the user asks you to do these tasks in a local repository.
-  When the user says that they will publish the repository on GitHub, scan the history for secrets.
-  The project needs a license.
-  If the project has no license, ask the user.
-
-  Make the README and the ignore rules safe to publish.
-  Research the better tool for that repository.
-  Design that tool.
-  Implement that tool only after the user approves the design.
-  Do not name a tool, a framework, or a language.
-  Do not implement new production code from the tests.
-
-  Do not add UI tests or end-to-end tests.
-  Do not diagnose an existing failure.
-  Do not change continuous integration.
+  Add, reorganize, or simplify unit tests and keep every case. Write
+  Cobertura XML and HTML coverage reports, and run incremental mutation
+  testing. Use this skill for that work in a local repository. When the
+  user will publish the repository on GitHub, also scan the history for
+  secrets, check the license, and make the README and ignore rules safe
+  to publish. Do not use this skill for UI or end-to-end tests, diagnosing
+  an existing failure, changing continuous integration, or writing
+  production code from the tests.
 license: MIT
 ---
 
