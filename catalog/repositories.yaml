@@ -106,3 +106,10 @@ repositories:
     name: asd-ste100-skill
     ref: master
     url: https://github.com/danyuchn/asd-ste100-skill
+
+  - id: curated-skills
+    owner: jahnog
+    name: CuratedSkills
+    ref: master
+    url: https://github.com/jahnog/CuratedSkills
+    source: local

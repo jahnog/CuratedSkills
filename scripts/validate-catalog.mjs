@@ -1,9 +1,13 @@
 #!/usr/bin/env node
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
 import {
+  ROOT,
   buildSkillFileUrl,
   folderUrlFromSkillFile,
   loadCatalog,
   rawUrlFromSkillFile,
+  resolvePrimaryFile,
   validateFeaturedSet,
   validateSkillEntry,
 } from './lib/catalog.mjs';
@@ -31,6 +35,18 @@ async function main() {
         id: skill.id,
         errors: ['folder_url derivation inconsistent'],
       });
+      continue;
+    }
+
+    if (repo.source === 'local') {
+      if (skill.origin !== 'first-party') {
+        failures.push({
+          id: skill.id,
+          errors: ['local repository entries must come from catalog/first-party.yaml'],
+        });
+        continue;
+      }
+      await readFile(join(ROOT, skill.path, resolvePrimaryFile(skill)));
       continue;
     }
 

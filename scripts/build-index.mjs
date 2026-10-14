@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import {
   ROOT,
@@ -47,13 +47,20 @@ async function buildEntry(skill, repositories, tiers, categories) {
   const folderUrl = folderUrlFromSkillFile(skillFileUrl);
   const rawUrl = rawUrlFromSkillFile(skillFileUrl);
 
-  let content = '';
-  let frontmatter = {};
-  try {
-    content = await fetchText(rawUrl);
-    ({ frontmatter } = parseFrontmatter(content));
-  } catch (error) {
-    console.warn(`Warning: could not fetch ${skill.id}: ${error.message}`);
+  let description = skill.description ?? '';
+  if (repo.source === 'local') {
+    if (skill.origin !== 'first-party') {
+      throw new Error(`${skill.id}: local repository entries must come from catalog/first-party.yaml`);
+    }
+    await readFile(join(ROOT, skill.path, primaryFile));
+  } else {
+    try {
+      const content = await fetchText(rawUrl);
+      const { frontmatter } = parseFrontmatter(content);
+      description = skill.description ?? frontmatter.description ?? '';
+    } catch (error) {
+      console.warn(`Warning: could not fetch ${skill.id}: ${error.message}`);
+    }
   }
 
   const tier = tiers.get(skill.trust_tier);
@@ -62,7 +69,7 @@ async function buildEntry(skill, repositories, tiers, categories) {
   return {
     id: skill.id,
     name: skill.name,
-    description: skill.description ?? frontmatter.description ?? '',
+    description,
     kind,
     primary_file: primaryFile,
     trust_tier: skill.trust_tier,
@@ -83,6 +90,7 @@ async function buildEntry(skill, repositories, tiers, categories) {
     folder_url: folderUrl,
     repo_url: repo.url,
     featured_order: Number.isInteger(skill.featured_order) ? skill.featured_order : null,
+    origin: skill.origin === 'first-party' ? 'first-party' : 'external',
   };
 }
 
