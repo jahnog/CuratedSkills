@@ -47,7 +47,6 @@ If the project already has a report path, keep that path.
 If the project has no report path, choose one stable Cobertura path.
 Choose one directory for the HTML report.
 Tell the user both paths.
-Add both paths to the ignore rules.
 These reports are products of the build.
 
 Keep an existing failure threshold.
