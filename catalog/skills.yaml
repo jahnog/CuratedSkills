@@ -561,3 +561,149 @@ skills:
     trust_tier: high
     categories: [hardening, pr-security-review]
     tags: [github-actions, ci, sentry]
+
+  # --- High trust: pstack (cursor/plugins) ---
+  - id: pstack-interrogate
+    name: Interrogate
+    description: Adversarial review with one readonly reviewer per model, merged into act-on, consider, noted, and dismissed. Uses Cursor subagents. Defaults to Opus and Grok when no model rule is set.
+    repository: cursor-plugins
+    path: pstack/skills/interrogate
+    trust_tier: high
+    categories: [code-quality, pr-security-review]
+    tags: [review, adversarial, multi-model]
+
+  - id: pstack-blast-radius
+    name: Blast Radius
+    description: Find what a change can break outside the diff, and prove the one safety fact by running the real code.
+    repository: cursor-plugins
+    path: pstack/skills/blast-radius
+    trust_tier: high
+    categories: [code-quality, architecture]
+    tags: [impact, review, verification]
+
+  - id: pstack-why
+    name: Why
+    description: Cited design-rationale read. Anchors on git blame and pull requests, then queries each available evidence source in parallel. Uses Cursor subagents.
+    repository: cursor-plugins
+    path: pstack/skills/why
+    trust_tier: high
+    categories: [architecture, debugging]
+    tags: [rationale, history, citations]
+
+  - id: pstack-how
+    name: How
+    description: Senior walkthrough of how a subsystem works, covering flow, ownership, and gotchas. Wide questions split across read-only Cursor explorers.
+    repository: cursor-plugins
+    path: pstack/skills/how
+    trust_tier: high
+    categories: [architecture]
+    tags: [walkthrough, onboarding, architecture]
+
+  - id: pstack-arena
+    name: Arena
+    description: Run one task on several isolated candidates, pick a base, and graft the strongest pieces of the others into it. Uses Cursor subagents.
+    repository: cursor-plugins
+    path: pstack/skills/arena
+    trust_tier: high
+    categories: [architecture, code-quality]
+    tags: [design, parallel, synthesis]
+
+  - id: pstack-architect
+    name: Architect
+    description: Sketch types and module boundaries with two competing designs before writing code, and throw the sketch out when implementation shows the shape is wrong. Uses Cursor subagents.
+    repository: cursor-plugins
+    path: pstack/skills/architect
+    trust_tier: high
+    categories: [architecture]
+    tags: [design, types, sketch]
+
+  - id: pstack-benchmark-checklist
+    name: Benchmark Checklist
+    description: Vet a performance claim for limiter, tuning, errors, repeatability, and whether the timed work actually ran.
+    repository: cursor-plugins
+    path: pstack/skills/benchmark-checklist
+    trust_tier: high
+    categories: [testing]
+    tags: [benchmark, performance, measurement]
+
+  - id: pstack-create-verification-skill
+    name: Create Verification Skill
+    description: Generate a project-local skill that launches the app and proves behavior the way a user does, for a UI, CLI, or API. Writes .cursor/skills/verify-<app>/.
+    repository: cursor-plugins
+    path: pstack/skills/create-verification-skill
+    trust_tier: high
+    categories: [testing]
+    tags: [verification, ui, cli]
+
+  - id: pstack-maintain-verification-skill
+    name: Maintain Verification Skill
+    description: Re-check that verification skill against source and one live pass per feature, shipping at most one PR of proven corrections. Edits .cursor/skills/verify-<app>/ only.
+    repository: cursor-plugins
+    path: pstack/skills/maintain-verification-skill
+    trust_tier: high
+    categories: [testing]
+    tags: [verification, drift, feature-map]
+
+  - id: pstack-correct
+    name: Correct
+    description: Make a repeated agent mistake impossible at the highest level that works, from architecture through types, lint, and tests. Prove the new check on a real past mistake.
+    repository: cursor-plugins
+    path: pstack/skills/correct
+    trust_tier: high
+    categories: [code-quality]
+    tags: [agents, lint, types]
+
+  - id: pstack-show-me-your-work
+    name: Show Me Your Work
+    description: Keep an append-only TSV of decisions with evidence pointers, and audit the log against the Cursor run transcript before handing it back.
+    repository: cursor-plugins
+    path: pstack/skills/show-me-your-work
+    trust_tier: high
+    categories: [define-and-plan]
+    tags: [audit, decisions, unattended]
+
+  - id: pstack-type-system-discipline
+    name: Type System Discipline
+    description: Make illegal states unrepresentable. Brand semantic primitives, parse external data at boundaries, and exhaust variants.
+    repository: cursor-plugins
+    path: pstack/skills/principle-type-system-discipline
+    trust_tier: high
+    categories: [architecture]
+    tags: [types, boundaries, invariants]
+
+  - id: pstack-typescript-best-practices
+    name: TypeScript Best Practices
+    description: Discriminated unions, branded primitives, schema-derived types, and no unchecked casts when editing TypeScript.
+    repository: cursor-plugins
+    path: pstack/skills/typescript-best-practices
+    trust_tier: high
+    categories: [code-quality]
+    tags: [typescript, types, casts]
+
+  - id: pstack-test-behavior
+    name: Test Behavior, Not Implementation
+    description: Assert the literal result a caller sees. Rewrite or delete a test that would still pass if every import returned undefined.
+    repository: cursor-plugins
+    path: pstack/skills/principle-test-behavior-not-implementation
+    trust_tier: high
+    categories: [testing]
+    tags: [tests, assertions, behavior]
+
+  - id: pstack-technical-writing
+    name: Technical Writing
+    description: Write docs, RFCs, READMEs, pull request descriptions, and commit messages with one Diátaxis mode, short active sentences, and Global English.
+    repository: cursor-plugins
+    path: pstack/skills/technical-writing
+    trust_tier: high
+    categories: [define-and-plan]
+    tags: [docs, writing, rfc]
+
+  # --- Medium trust: simplified English ---
+  - id: asd-ste100
+    name: Simplified Technical English
+    description: Rewrite prompts, tool descriptions, and skill text into short active sentences that keep every fact and hedge. Strict mode is for procedures and agent instructions. Adapted from ASD-STE100. The official dictionary is not included, and the linter does not prove the meaning stayed the same.
+    repository: danyuchn-asd-ste100
+    path: ""
+    trust_tier: medium
+    categories: [code-quality]
+    tags: [ste, prompts, skills, plain-english]
