@@ -1,1 +1,6 @@
-skills: []
+skills:
+  - id: unit-tests-coverage-mutation
+    title: Unit Tests, Coverage, and Mutation
+    trust_tier: high
+    categories: [testing]
+    tags: [unit-tests, coverage, cobertura, mutation-testing, test-organization, open-source]

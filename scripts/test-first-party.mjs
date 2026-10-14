@@ -459,8 +459,11 @@ await withTree({
 
 const catalog = await loadCatalog();
 const firstParty = catalog.skills.filter((skill) => skill.origin === 'first-party');
-assert.equal(firstParty.length, 0);
-assert.equal(catalog.skills.length, 75);
+assert.deepEqual(
+  firstParty.map((skill) => skill.id),
+  ['unit-tests-coverage-mutation'],
+);
+assert.equal(catalog.skills.length, 76);
 for (const entry of firstParty) {
   await runSkillChecks(ROOT, entry.id, { tools: true });
 }
