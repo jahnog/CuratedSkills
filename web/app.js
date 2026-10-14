@@ -179,6 +179,9 @@ function renderCard(skill) {
   const featuredPill = isFeatured(skill)
     ? '<span class="wl-chip meta-pill featured-pill">Featured</span>'
     : '';
+  const originPill = skill.origin === 'first-party'
+    ? `<span class="wl-chip meta-pill origin-pill" title="${escapeHtml('Maintained in this repository. The trust badge is a separate editorial judgment.')}">From this repo</span>`
+    : '';
 
   // The title link is stretched over the whole card (see styles.css), so
   // the card acts as one link while the markup stays valid: no nested <a>.
@@ -192,6 +195,7 @@ function renderCard(skill) {
     <p class="card-description">${escapeHtml(skill.description)}</p>
     <div class="card-meta">
       ${featuredPill}
+      ${originPill}
       ${skill.category_labels.map((label) => `<span class="wl-chip meta-pill">${escapeHtml(label)}</span>`).join('')}
       ${skill.tags.slice(0, 3).map((tag) => `<span class="wl-chip meta-pill">${escapeHtml(tag)}</span>`).join('')}
     </div>

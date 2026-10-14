@@ -2,7 +2,7 @@
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import MiniSearch from 'minisearch';
-import { FEATURED_SKILL_IDS, ROOT } from './lib/catalog.mjs';
+import { FEATURED_SKILL_IDS, ROOT, loadCatalog } from './lib/catalog.mjs';
 
 const INDEX_PATH = join(ROOT, 'docs', 'data', 'index.json');
 
@@ -81,6 +81,19 @@ async function main() {
     defaultOrder.slice(0, FEATURED_SKILL_IDS.length).every((skill, i) => skill.id === FEATURED_SKILL_IDS[i]),
     'default sort does not put featured skills first in featured_order',
   );
+
+  assert(
+    skills.every((skill) => skill.origin === 'external' || skill.origin === 'first-party'),
+    'every index entry needs origin external or first-party',
+  );
+  const catalog = await loadCatalog();
+  const firstPartyIds = catalog.skills
+    .filter((skill) => skill.origin === 'first-party')
+    .map((skill) => skill.id);
+  for (const id of firstPartyIds) {
+    const indexed = skills.find((skill) => skill.id === id);
+    assert(indexed && indexed.origin === 'first-party', `index is missing first-party skill ${id}`);
+  }
 
   const miniSearch = new MiniSearch(SEARCH_OPTIONS);
   miniSearch.addAll(documentsForIndex(skills));
